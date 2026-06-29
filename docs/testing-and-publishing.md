@@ -91,9 +91,114 @@ xcodebuild -scheme TacXO \
   build
 ```
 
+List available simulators if the destination name fails:
+
+```bash
+xcrun simctl list devices available
+```
+
 ---
 
-## 2. TestFlight
+## 2. Redeploy after app changes
+
+Use this checklist whenever you change code and want a new build on your phone (TestFlight) or the App Store.
+
+### Step 1 — Verify locally
+
+```bash
+cd /Users/khang/work/side-project/xo
+
+# If you edited project.yml
+xcodegen generate
+
+# Run all unit tests
+xcodebuild -scheme TacXO \
+  -destination 'platform=iOS Simulator,name=iPhone 16' \
+  test
+```
+
+In the simulator (⌘R), run a quick smoke test:
+
+- [ ] vs Neighbor: AI responds with updated think timing
+- [ ] Win/loss overlay text is readable (blur backdrop)
+- [ ] Nav bar text readable with system Dark Mode enabled
+- [ ] Settings persist after relaunch
+
+Fix any failures before uploading — App Store Connect will not run your tests for you.
+
+### Step 2 — Bump the build number
+
+**Every upload to App Store Connect must have a higher build number than the last one**, even for small fixes.
+
+Edit `project.yml`:
+
+```yaml
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"   # bump only for user-visible releases (1.0.0 → 1.0.1)
+    CURRENT_PROJECT_VERSION: "2" # increment for every upload (1 → 2 → 3 …)
+```
+
+Regenerate and reopen:
+
+```bash
+xcodegen generate
+open TacXO.xcodeproj
+```
+
+Confirm in Xcode → **TacXO** target → **General** that **Build** matches `CURRENT_PROJECT_VERSION`.
+
+| Change type | Version (`MARKETING_VERSION`) | Build (`CURRENT_PROJECT_VERSION`) |
+|-------------|-------------------------------|-----------------------------------|
+| Bug fix / tweak (same release) | unchanged | **must increase** |
+| New features users should notice | increase (e.g. `1.0.0` → `1.1.0`) | **must increase** |
+| First upload | `1.0.0` | `1` |
+
+### Step 3 — Archive and upload
+
+1. Open `TacXO.xcodeproj` in Xcode.
+2. Select **Any iOS Device (arm64)** as the run destination (not a simulator).
+3. **Product → Archive**.
+4. In the Organizer: select the new archive → **Distribute App**.
+5. **App Store Connect** → **Upload** → follow prompts (include symbols, automatic signing).
+6. Wait for **Upload Successful**.
+
+### Step 4 — Install on your phone (TestFlight)
+
+1. App Store Connect → **TacXO** → **TestFlight** tab.
+2. Wait until the build status is **Ready to Test** (usually 5–30 minutes; email if it fails).
+3. **Internal Testing** → add the new build to your group (or it auto-appears for internal testers).
+4. On iPhone: open **TestFlight** → **Update** or **Install** on TacXO.
+
+TestFlight keeps the previous build until you install the new one. If the update does not appear, pull down to refresh TestFlight or force-quit and reopen the app.
+
+### Step 5 — App Store release (optional)
+
+Only needed when you want the public App Store listing updated, not just TestFlight:
+
+1. App Store Connect → **App Store** tab → your version (or **+ Version** for a new marketing version).
+2. Under **Build**, select the new TestFlight build you validated.
+3. Update **What’s New in This Version**.
+4. **Add for Review** → **Submit to App Review**.
+
+For a TestFlight-only iteration (testing with yourself or internal testers), **Steps 1–4 are enough** — no App Store review required.
+
+### Redeploy quick checklist
+
+```
+[ ] Tests pass (xcodebuild test)
+[ ] Smoke test in simulator
+[ ] CURRENT_PROJECT_VERSION incremented in project.yml
+[ ] xcodegen generate (if project.yml changed)
+[ ] Archive → Upload to App Store Connect
+[ ] TestFlight build Ready to Test
+[ ] Install/update on device via TestFlight
+[ ] (Optional) Submit new build for App Store review
+```
+
+---
+
+## 3. TestFlight
 
 TestFlight lets you install release builds on your own devices and share with beta testers before App Store release.
 
@@ -195,7 +300,7 @@ If processing fails, check email from Apple or **Activity** in App Store Connect
 
 ---
 
-## 3. Publish to the App Store
+## 4. Publish to the App Store
 
 ### Before you submit
 
@@ -238,9 +343,12 @@ Complete these in App Store Connect under your app:
 
 ### Updating later
 
-1. Bump **Version** (e.g. `1.0.0` → `1.1.0`) for user-visible changes.
-2. Bump **Build** for every upload.
-3. Archive → Upload → select new build in App Store Connect → submit.
+See **[§2 Redeploy after app changes](#2-redeploy-after-app-changes)** for the full workflow. In short:
+
+1. Run tests and smoke-test locally.
+2. Bump **Build** (`CURRENT_PROJECT_VERSION`) for every upload; bump **Version** (`MARKETING_VERSION`) when users should see a new release number.
+3. Archive → Upload → wait for TestFlight processing.
+4. Install via TestFlight; submit for App Store review when ready to go live.
 
 ---
 
@@ -252,6 +360,7 @@ Complete these in App Store Connect under your app:
 | Run tests | `xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test` |
 | Run on simulator | Xcode → ⌘R |
 | Run on device | Connect device, set signing team, ⌘R |
+| **Redeploy after code changes** | Tests → bump build in `project.yml` → Archive → TestFlight |
 | Upload to TestFlight | **Product → Archive** → Distribute → App Store Connect |
 | Install beta | TestFlight app on iPhone |
 | Go live | App Store Connect → Submit for Review → Release |
