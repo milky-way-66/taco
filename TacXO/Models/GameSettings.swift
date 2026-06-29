@@ -65,7 +65,7 @@ struct GameSettings: Codable, Equatable {
 
     static let `default` = GameSettings()
 
-    private static let storageKey = "xo.game.settings"
+    private static let storageKey = "tacxo.game.settings"
 
     static func load() -> GameSettings {
         guard

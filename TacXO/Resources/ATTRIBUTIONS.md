@@ -1,6 +1,6 @@
 # Asset Attributions
 
-Third-party assets used in XO. All are free for commercial use in apps.
+Third-party assets used in TacXO. All are free for commercial use in apps.
 
 ## Sounds
 

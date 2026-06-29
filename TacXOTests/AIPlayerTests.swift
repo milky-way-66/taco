@@ -1,5 +1,5 @@
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class AIPlayerTests: XCTestCase {
     func testTakesWinningMoveOn3x3() {

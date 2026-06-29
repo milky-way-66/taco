@@ -1,7 +1,7 @@
 import XCTest
-@testable import XO
+@testable import TacXO
 
-final class XOTests: XCTestCase {
+final class TacXOTests: XCTestCase {
     func testPlaceholder() {
         XCTAssertTrue(true)
     }

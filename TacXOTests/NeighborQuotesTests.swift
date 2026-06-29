@@ -1,5 +1,5 @@
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class NeighborQuotesTests: XCTestCase {
     func testVietnameseQuotesUseNorthernTraditionalTone() {

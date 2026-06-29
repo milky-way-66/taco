@@ -16,51 +16,51 @@
 
 | File | Responsibility |
 |------|----------------|
-| `XO/XOApp.swift` | App entry, inject `GameController` |
-| `XO/Models/Mark.swift` | X / O enum |
-| `XO/Models/Cell.swift` | Grid coordinate, Hashable |
-| `XO/Models/GameSettings.swift` | Rules + UserDefaults persistence |
-| `XO/Engine/WinChecker.swift` | K-in-a-row from last move |
-| `XO/Engine/GameEngine.swift` | Board state, moves, outcomes |
-| `XO/AI/AdaptiveDifficulty.swift` | Level 0–5 up/down |
-| `XO/AI/AIPlayer.swift` | Minimax + heuristics |
-| `XO/Personality/NeighborQuotes.swift` | Quote list + random |
-| `XO/Personality/SoundManager.swift` | SFX + haptics |
-| `XO/ViewModels/GameController.swift` | UI state, AI turns, loss flow |
-| `XO/Views/CellView.swift` | Single cell mark rendering |
-| `XO/Views/BoardView.swift` | Grid, pan, tap handling |
-| `XO/Views/LossOverlayView.swift` | Neighbor quote popup |
-| `XO/Views/PlayView.swift` | Main game screen |
-| `XO/Views/SettingsView.swift` | Rules form |
-| `XO/Resources/` | Texture + audio assets |
-| `XOTests/` | Unit tests for engine + AI |
+| `TacXO/TacXOApp.swift` | App entry, inject `GameController` |
+| `TacXO/Models/Mark.swift` | X / O enum |
+| `TacXO/Models/Cell.swift` | Grid coordinate, Hashable |
+| `TacXO/Models/GameSettings.swift` | Rules + UserDefaults persistence |
+| `TacXO/Engine/WinChecker.swift` | K-in-a-row from last move |
+| `TacXO/Engine/GameEngine.swift` | Board state, moves, outcomes |
+| `TacXO/AI/AdaptiveDifficulty.swift` | Level 0–5 up/down |
+| `TacXO/AI/AIPlayer.swift` | Minimax + heuristics |
+| `TacXO/Personality/NeighborQuotes.swift` | Quote list + random |
+| `TacXO/Personality/SoundManager.swift` | SFX + haptics |
+| `TacXO/ViewModels/GameController.swift` | UI state, AI turns, loss flow |
+| `TacXO/Views/CellView.swift` | Single cell mark rendering |
+| `TacXO/Views/BoardView.swift` | Grid, pan, tap handling |
+| `TacXO/Views/LossOverlayView.swift` | Neighbor quote popup |
+| `TacXO/Views/PlayView.swift` | Main game screen |
+| `TacXO/Views/SettingsView.swift` | Rules form |
+| `TacXO/Resources/` | Texture + audio assets |
+| `TacXOTests/` | Unit tests for engine + AI |
 
 ---
 
 ### Task 1: Xcode project scaffold
 
 **Files:**
-- Create: Xcode project `XO.xcodeproj` (iOS App + Unit Test target)
-- Create: folder structure under `XO/` and `XOTests/`
+- Create: Xcode project `TacXO.xcodeproj` (iOS App + Unit Test target)
+- Create: folder structure under `TacXO/` and `TacXOTests/`
 
 - [ ] **Step 1: Create Xcode project**
 
 In Xcode (or via `xcodebuild` after project creation):
 
 1. **File → New → Project → iOS → App**
-2. Product Name: `XO`
+2. Product Name: `TacXO`
 3. Interface: **SwiftUI**, Language: **Swift**
-4. Include **Unit Tests** (creates `XOTests` target)
+4. Include **Unit Tests** (creates `TacXOTests` target)
 5. Deployment target: **iOS 17.0**
-6. Bundle ID: `com.xo.game`
+6. Bundle ID: `com.tacxo.game`
 7. Save into repo root: `/Users/khang/work/side-project/xo/`
 
 - [ ] **Step 2: Create folder groups matching spec**
 
-Create groups (with folder references) inside the `XO` target:
+Create groups (with folder references) inside the `TacXO` target:
 
 ```
-XO/
+TacXO/
 ├── Models/
 ├── Engine/
 ├── AI/
@@ -78,7 +78,7 @@ Run:
 
 ```bash
 cd /Users/khang/work/side-project/xo
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -86,8 +86,8 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 4: Commit**
 
 ```bash
-git add XO.xcodeproj XO/ XOTests/
-git commit -m "chore: scaffold XO iOS project with test target"
+git add TacXO.xcodeproj TacXO/ TacXOTests/
+git commit -m "chore: scaffold TacXO iOS project with test target"
 ```
 
 ---
@@ -95,9 +95,9 @@ git commit -m "chore: scaffold XO iOS project with test target"
 ### Task 2: Core models
 
 **Files:**
-- Create: `XO/Models/Mark.swift`
-- Create: `XO/Models/Cell.swift`
-- Create: `XO/Models/GameSettings.swift`
+- Create: `TacXO/Models/Mark.swift`
+- Create: `TacXO/Models/Cell.swift`
+- Create: `TacXO/Models/GameSettings.swift`
 
 - [ ] **Step 1: Create Mark.swift**
 
@@ -189,12 +189,12 @@ struct GameSettings: Codable, Equatable {
 }
 ```
 
-- [ ] **Step 4: Add files to XO target and build**
+- [ ] **Step 4: Add files to TacXO target and build**
 
 Run:
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -202,7 +202,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/Models/
+git add TacXO/Models/
 git commit -m "feat: add Mark, Cell, and GameSettings models"
 ```
 
@@ -211,14 +211,14 @@ git commit -m "feat: add Mark, Cell, and GameSettings models"
 ### Task 3: WinChecker (TDD)
 
 **Files:**
-- Create: `XO/Engine/WinChecker.swift`
-- Create: `XOTests/WinCheckerTests.swift`
+- Create: `TacXO/Engine/WinChecker.swift`
+- Create: `TacXOTests/WinCheckerTests.swift`
 
 - [ ] **Step 1: Write failing tests**
 
 ```swift
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class WinCheckerTests: XCTestCase {
     func testHorizontalWin() {
@@ -262,7 +262,7 @@ final class WinCheckerTests: XCTestCase {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/WinCheckerTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/WinCheckerTests
 ```
 
 Expected: FAIL — `WinChecker` not found
@@ -308,7 +308,7 @@ enum WinChecker {
 - [ ] **Step 4: Run tests to verify they pass**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/WinCheckerTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/WinCheckerTests
 ```
 
 Expected: all 5 tests PASS
@@ -316,7 +316,7 @@ Expected: all 5 tests PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/Engine/WinChecker.swift XOTests/WinCheckerTests.swift
+git add TacXO/Engine/WinChecker.swift TacXOTests/WinCheckerTests.swift
 git commit -m "feat: add WinChecker with K-in-a-row detection"
 ```
 
@@ -325,14 +325,14 @@ git commit -m "feat: add WinChecker with K-in-a-row detection"
 ### Task 4: GameEngine (TDD)
 
 **Files:**
-- Create: `XO/Engine/GameEngine.swift`
-- Create: `XOTests/GameEngineTests.swift`
+- Create: `TacXO/Engine/GameEngine.swift`
+- Create: `TacXOTests/GameEngineTests.swift`
 
 - [ ] **Step 1: Write failing tests**
 
 ```swift
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class GameEngineTests: XCTestCase {
     func testXStartsFirst() {
@@ -404,7 +404,7 @@ final class GameEngineTests: XCTestCase {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/GameEngineTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/GameEngineTests
 ```
 
 Expected: FAIL — `GameEngine` not found
@@ -485,7 +485,7 @@ struct GameEngine {
 - [ ] **Step 4: Run tests to verify they pass**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/GameEngineTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/GameEngineTests
 ```
 
 Expected: all 8 tests PASS
@@ -493,7 +493,7 @@ Expected: all 8 tests PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/Engine/GameEngine.swift XOTests/GameEngineTests.swift
+git add TacXO/Engine/GameEngine.swift TacXOTests/GameEngineTests.swift
 git commit -m "feat: add GameEngine with move validation and outcomes"
 ```
 
@@ -502,14 +502,14 @@ git commit -m "feat: add GameEngine with move validation and outcomes"
 ### Task 5: AdaptiveDifficulty (TDD)
 
 **Files:**
-- Create: `XO/AI/AdaptiveDifficulty.swift`
-- Create: `XOTests/AdaptiveDifficultyTests.swift`
+- Create: `TacXO/AI/AdaptiveDifficulty.swift`
+- Create: `TacXOTests/AdaptiveDifficultyTests.swift`
 
 - [ ] **Step 1: Write failing tests**
 
 ```swift
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class AdaptiveDifficultyTests: XCTestCase {
     override func tearDown() {
@@ -548,7 +548,7 @@ final class AdaptiveDifficultyTests: XCTestCase {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/AdaptiveDifficultyTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/AdaptiveDifficultyTests
 ```
 
 Expected: FAIL
@@ -590,7 +590,7 @@ struct AdaptiveDifficulty {
 - [ ] **Step 4: Run tests to verify they pass**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/AdaptiveDifficultyTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/AdaptiveDifficultyTests
 ```
 
 Expected: all 4 tests PASS
@@ -598,7 +598,7 @@ Expected: all 4 tests PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/AI/AdaptiveDifficulty.swift XOTests/AdaptiveDifficultyTests.swift
+git add TacXO/AI/AdaptiveDifficulty.swift TacXOTests/AdaptiveDifficultyTests.swift
 git commit -m "feat: add adaptive difficulty persistence for Neighbor AI"
 ```
 
@@ -607,14 +607,14 @@ git commit -m "feat: add adaptive difficulty persistence for Neighbor AI"
 ### Task 6: AIPlayer (TDD)
 
 **Files:**
-- Create: `XO/AI/AIPlayer.swift`
-- Create: `XOTests/AIPlayerTests.swift`
+- Create: `TacXO/AI/AIPlayer.swift`
+- Create: `TacXOTests/AIPlayerTests.swift`
 
 - [ ] **Step 1: Write failing tests**
 
 ```swift
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class AIPlayerTests: XCTestCase {
     func testTakesWinningMoveOn3x3() {
@@ -652,7 +652,7 @@ final class AIPlayerTests: XCTestCase {
 - [ ] **Step 2: Run tests to verify they fail**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/AIPlayerTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/AIPlayerTests
 ```
 
 Expected: FAIL
@@ -769,7 +769,7 @@ enum AIPlayer {
 - [ ] **Step 4: Run tests to verify they pass**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:XOTests/AIPlayerTests
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:TacXOTests/AIPlayerTests
 ```
 
 Expected: all 3 tests PASS
@@ -777,7 +777,7 @@ Expected: all 3 tests PASS
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/AI/AIPlayer.swift XOTests/AIPlayerTests.swift
+git add TacXO/AI/AIPlayer.swift TacXOTests/AIPlayerTests.swift
 git commit -m "feat: add AIPlayer with threat detection and difficulty mixing"
 ```
 
@@ -786,10 +786,10 @@ git commit -m "feat: add AIPlayer with threat detection and difficulty mixing"
 ### Task 7: Neighbor personality (quotes + sound)
 
 **Files:**
-- Create: `XO/Personality/NeighborQuotes.swift`
-- Create: `XO/Personality/SoundManager.swift`
-- Create: `XO/Resources/place.wav` (short scratch — generate or record <1s)
-- Create: `XO/Resources/neighbor_loss_1.wav`, `neighbor_loss_2.wav`, `neighbor_loss_3.wav`
+- Create: `TacXO/Personality/NeighborQuotes.swift`
+- Create: `TacXO/Personality/SoundManager.swift`
+- Create: `TacXO/Resources/place.wav` (short scratch — generate or record <1s)
+- Create: `TacXO/Resources/neighbor_loss_1.wav`, `neighbor_loss_2.wav`, `neighbor_loss_3.wav`
 
 - [ ] **Step 1: Create NeighborQuotes.swift**
 
@@ -888,12 +888,12 @@ final class SoundManager {
 
 - [ ] **Step 3: Add placeholder audio files**
 
-Generate 4 short silent/near-silent WAV files (<0.5s) and add to `XO/Resources/`. Ensure they are in the **Copy Bundle Resources** build phase.
+Generate 4 short silent/near-silent WAV files (<0.5s) and add to `TacXO/Resources/`. Ensure they are in the **Copy Bundle Resources** build phase.
 
 If no audio tooling available, record 0.1s silence via:
 
 ```bash
-cd XO/Resources
+cd TacXO/Resources
 ffmpeg -f lavfi -i anullsrc=r=44100:cl=mono -t 0.2 -q:a 9 -acodec libmp3lame place.wav 2>/dev/null || \
   python3 -c "import wave,struct; w=wave.open('place.wav','w'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(44100); w.writeframes(struct.pack('<h',0)*1000); w.close()"
 # Copy place.wav to neighbor_loss_1.wav, neighbor_loss_2.wav, neighbor_loss_3.wav
@@ -904,7 +904,7 @@ Replace with real SFX before App Store submission.
 - [ ] **Step 4: Build**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -912,7 +912,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 5: Commit**
 
 ```bash
-git add XO/Personality/ XO/Resources/
+git add TacXO/Personality/ TacXO/Resources/
 git commit -m "feat: add Neighbor quotes and SoundManager with placeholder SFX"
 ```
 
@@ -921,7 +921,7 @@ git commit -m "feat: add Neighbor quotes and SoundManager with placeholder SFX"
 ### Task 8: GameController
 
 **Files:**
-- Create: `XO/ViewModels/GameController.swift`
+- Create: `TacXO/ViewModels/GameController.swift`
 
 - [ ] **Step 1: Implement GameController.swift**
 
@@ -1008,7 +1008,7 @@ final class GameController {
 - [ ] **Step 2: Build**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -1016,7 +1016,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 3: Commit**
 
 ```bash
-git add XO/ViewModels/GameController.swift
+git add TacXO/ViewModels/GameController.swift
 git commit -m "feat: add GameController wiring engine, AI, and neighbor loss flow"
 ```
 
@@ -1025,8 +1025,8 @@ git commit -m "feat: add GameController wiring engine, AI, and neighbor loss flo
 ### Task 9: Board UI (CellView + BoardView)
 
 **Files:**
-- Create: `XO/Views/CellView.swift`
-- Create: `XO/Views/BoardView.swift`
+- Create: `TacXO/Views/CellView.swift`
+- Create: `TacXO/Views/BoardView.swift`
 
 - [ ] **Step 1: Create CellView.swift**
 
@@ -1121,7 +1121,7 @@ struct BoardView: View {
 - [ ] **Step 3: Build**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -1129,7 +1129,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 4: Commit**
 
 ```bash
-git add XO/Views/CellView.swift XO/Views/BoardView.swift
+git add TacXO/Views/CellView.swift TacXO/Views/BoardView.swift
 git commit -m "feat: add paper-style board and cell views"
 ```
 
@@ -1138,8 +1138,8 @@ git commit -m "feat: add paper-style board and cell views"
 ### Task 10: Play screen + loss overlay
 
 **Files:**
-- Create: `XO/Views/LossOverlayView.swift`
-- Create: `XO/Views/PlayView.swift`
+- Create: `TacXO/Views/LossOverlayView.swift`
+- Create: `TacXO/Views/PlayView.swift`
 
 - [ ] **Step 1: Create LossOverlayView.swift**
 
@@ -1243,7 +1243,7 @@ struct PlayView: View {
 - [ ] **Step 3: Build**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -1251,7 +1251,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 4: Commit**
 
 ```bash
-git add XO/Views/LossOverlayView.swift XO/Views/PlayView.swift
+git add TacXO/Views/LossOverlayView.swift TacXO/Views/PlayView.swift
 git commit -m "feat: add PlayView with turn display and loss overlay"
 ```
 
@@ -1260,7 +1260,7 @@ git commit -m "feat: add PlayView with turn display and loss overlay"
 ### Task 11: Settings screen
 
 **Files:**
-- Create: `XO/Views/SettingsView.swift`
+- Create: `TacXO/Views/SettingsView.swift`
 
 - [ ] **Step 1: Create SettingsView.swift**
 
@@ -1319,7 +1319,7 @@ struct SettingsView: View {
 - [ ] **Step 2: Build**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 ```
 
 Expected: `BUILD SUCCEEDED`
@@ -1327,7 +1327,7 @@ Expected: `BUILD SUCCEEDED`
 - [ ] **Step 3: Commit**
 
 ```bash
-git add XO/Views/SettingsView.swift
+git add TacXO/Views/SettingsView.swift
 git commit -m "feat: add SettingsView for rules configuration"
 ```
 
@@ -1336,15 +1336,15 @@ git commit -m "feat: add SettingsView for rules configuration"
 ### Task 12: App entry + final wiring
 
 **Files:**
-- Modify: `XO/XOApp.swift`
+- Modify: `TacXO/TacXOApp.swift`
 
-- [ ] **Step 1: Wire XOApp.swift**
+- [ ] **Step 1: Wire TacXOApp.swift**
 
 ```swift
 import SwiftUI
 
 @main
-struct XOApp: App {
+struct TacXOApp: App {
     @State private var controller = GameController()
 
     var body: some Scene {
@@ -1361,21 +1361,21 @@ struct XOApp: App {
 - [ ] **Step 2: Run full test suite**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test
 ```
 
-Expected: all XOTests PASS
+Expected: all TacXOTests PASS
 
 - [ ] **Step 3: Run app in simulator**
 
 ```bash
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' build
 open -a Simulator
 # Install and launch via Xcode Run (⌘R) or:
 xcrun simctl boot "iPhone 16" 2>/dev/null || true
-xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' -derivedDataPath build build
-xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/XO.app
-xcrun simctl launch booted com.xo.game
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' -derivedDataPath build build
+xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/TacXO.app
+xcrun simctl launch booted com.tacxo.game
 ```
 
 Manual smoke test:
@@ -1388,7 +1388,7 @@ Manual smoke test:
 - [ ] **Step 4: Commit**
 
 ```bash
-git add XO/XOApp.swift
+git add TacXO/TacXOApp.swift
 git commit -m "feat: wire app entry to PlayView and complete v1 flow"
 ```
 

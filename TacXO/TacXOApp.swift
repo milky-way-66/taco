@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct XOApp: App {
+struct TacXOApp: App {
     @State private var controller = GameController()
 
     var body: some Scene {

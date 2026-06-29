@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-29  
 **Status:** Approved  
-**Codename:** XO (grumpy neighbor edition)
+**Codename:** TacXO (grumpy neighbor edition)
 
 ## Summary
 
@@ -216,7 +216,7 @@ All clips < 1 second. No background music. Preloaded at launch via SoundManager.
 
 ```
 xo/
-├── XOApp.swift
+├── TacXOApp.swift
 ├── Models/
 │   ├── Mark.swift
 │   ├── Cell.swift

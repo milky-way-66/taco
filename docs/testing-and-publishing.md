@@ -1,12 +1,12 @@
-# XO — Local Testing, TestFlight, and App Store Publishing
+# TacXO — Local Testing, TestFlight, and App Store Publishing
 
-This guide covers how to run and test **XO** on your Mac, distribute builds via **TestFlight**, and submit to the **App Store**.
+This guide covers how to run and test **TacXO** on your Mac, distribute builds via **TestFlight**, and submit to the **App Store**.
 
 | Item | Value |
 |------|-------|
-| Bundle ID | `com.xo.game` |
+| Bundle ID | `com.tacxo.game` |
 | Minimum iOS | 17.0 |
-| Xcode scheme | `XO` |
+| Xcode scheme | `TacXO` |
 | Project config | `project.yml` (regenerate with `xcodegen` after edits) |
 
 ---
@@ -26,24 +26,24 @@ This guide covers how to run and test **XO** on your Mac, distribute builds via 
 
 ```bash
 cd /Users/khang/work/side-project/xo
-open XO.xcodeproj
+open TacXO.xcodeproj
 ```
 
 If you changed `project.yml`, regenerate the Xcode project first:
 
 ```bash
 xcodegen generate
-open XO.xcodeproj
+open TacXO.xcodeproj
 ```
 
 ### Run unit tests
 
-**In Xcode:** select the **XO** scheme → **Product → Test** (⌘U).
+**In Xcode:** select the **TacXO** scheme → **Product → Test** (⌘U).
 
 **From the terminal:**
 
 ```bash
-xcodebuild -scheme XO \
+xcodebuild -scheme TacXO \
   -destination 'platform=iOS Simulator,name=iPhone 16' \
   test
 ```
@@ -51,9 +51,9 @@ xcodebuild -scheme XO \
 Run a single test class:
 
 ```bash
-xcodebuild -scheme XO \
+xcodebuild -scheme TacXO \
   -destination 'platform=iOS Simulator,name=iPhone 16' \
-  test -only-testing:XOTests/GameEngineTests
+  test -only-testing:TacXOTests/GameEngineTests
 ```
 
 ### Run in the iOS Simulator
@@ -76,7 +76,7 @@ The app should open directly on the board — no onboarding.
 1. Connect the device via USB (or enable wireless debugging in **Window → Devices and Simulators**).
 2. On the device: **Settings → Privacy & Security → Developer Mode** → enable (restart if prompted).
 3. In Xcode, select your device in the scheme menu.
-4. **Signing & Capabilities** tab on the **XO** target:
+4. **Signing & Capabilities** tab on the **TacXO** target:
    - Check **Automatically manage signing**.
    - Choose your **Team** (your Apple Developer account).
 5. Press **Run** (⌘R). Trust the developer certificate on the device if iOS asks.
@@ -86,7 +86,7 @@ This is the best way to test real haptics, audio levels, and performance.
 ### Build from the command line (no Xcode UI)
 
 ```bash
-xcodebuild -scheme XO \
+xcodebuild -scheme TacXO \
   -destination 'platform=iOS Simulator,name=iPhone 16' \
   build
 ```
@@ -105,19 +105,19 @@ TestFlight lets you install release builds on your own devices and share with be
 2. **Apps → + → New App**.
 3. Fill in:
    - **Platform:** iOS
-   - **Name:** XO (or your public name)
+   - **Name:** TacXO
    - **Primary language**
-   - **Bundle ID:** `com.xo.game` (must match `project.yml`)
-   - **SKU:** any unique string (e.g. `xo-game-001`)
+   - **Bundle ID:** `com.tacxo.game` (must match `project.yml`)
+   - **SKU:** any unique string (e.g. `tacxo-game-001`)
 4. Create the app record. You do **not** need to submit for review yet.
 
 #### B. Configure signing in Xcode
 
-1. Open `XO.xcodeproj` → select the **XO** target → **Signing & Capabilities**.
+1. Open `TacXO.xcodeproj` → select the **TacXO** target → **Signing & Capabilities**.
 2. Enable **Automatically manage signing**.
 3. Select your **Team**.
-4. Confirm **Bundle Identifier** is `com.xo.game`.
-5. Repeat for **XOTests** if Xcode warns about signing (usually automatic).
+4. Confirm **Bundle Identifier** is `com.tacxo.game`.
+5. Repeat for **TacXOTests** if Xcode warns about signing (usually automatic).
 
 Xcode will create a Distribution certificate and App Store provisioning profile when you archive.
 
@@ -125,14 +125,14 @@ Xcode will create a Distribution certificate and App Store provisioning profile 
 
 App Store Connect rejects builds without a 1024×1024 app icon.
 
-1. Add a 1024×1024 PNG to `XO/Resources/Assets.xcassets/AppIcon.appiconset/`.
+1. Add a 1024×1024 PNG to `TacXO/Resources/Assets.xcassets/AppIcon.appiconset/`.
 2. Update `Contents.json` in that folder, or drag the image into the App Icon slot in Xcode’s asset catalog.
 
 ### Upload a build
 
 #### Step 1: Set version and build number
 
-In Xcode → **XO** target → **General**:
+In Xcode → **TacXO** target → **General**:
 
 | Field | Example | Notes |
 |-------|---------|-------|
@@ -178,7 +178,7 @@ If processing fails, check email from Apple or **Activity** in App Store Connect
 2. Create a group (e.g. “Team”) and add the build.
 3. On your iPhone, install [TestFlight](https://apps.apple.com/app/testflight/id899247664) from the App Store.
 4. Accept the invite email or open the TestFlight link.
-5. Install **XO** and test.
+5. Install **TacXO** and test.
 
 #### External testing (wider audience)
 
@@ -208,12 +208,12 @@ Complete these in App Store Connect under your app:
 | Description, keywords, support URL | App Information |
 | Privacy Policy URL | Required for all apps |
 | Age rating questionnaire | App Privacy |
-| App Privacy details (data collection) | App Privacy — XO likely collects **no data** if you don’t use analytics |
+| App Privacy details (data collection) | App Privacy — TacXO likely collects **no data** if you don’t use analytics |
 | Copyright, category | App Information |
 
-**XO-specific checks:**
+**TacXO-specific checks:**
 
-- Verify `paper_texture.jpg` license in `XO/Resources/ATTRIBUTIONS.md` is acceptable for commercial distribution.
+- Verify `paper_texture.jpg` license in `TacXO/Resources/ATTRIBUTIONS.md` is acceptable for commercial distribution.
 - Confirm neighbor audio assets are yours or properly licensed.
 
 ### Choose a build
@@ -227,7 +227,7 @@ Complete these in App Store Connect under your app:
 
 1. Complete all required fields (red warnings must be resolved).
 2. **Add for Review** → **Submit to App Review**.
-3. Answer export compliance (XO has no encryption beyond standard HTTPS — typically “No” for custom encryption).
+3. Answer export compliance (TacXO has no encryption beyond standard HTTPS — typically “No” for custom encryption).
 4. Wait for review (often 24–48 hours; can be longer).
 
 ### After approval
@@ -249,7 +249,7 @@ Complete these in App Store Connect under your app:
 | Goal | Command / action |
 |------|------------------|
 | Regenerate Xcode project | `xcodegen generate` |
-| Run tests | `xcodebuild -scheme XO -destination 'platform=iOS Simulator,name=iPhone 16' test` |
+| Run tests | `xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 16' test` |
 | Run on simulator | Xcode → ⌘R |
 | Run on device | Connect device, set signing team, ⌘R |
 | Upload to TestFlight | **Product → Archive** → Distribute → App Store Connect |
@@ -263,7 +263,7 @@ Complete these in App Store Connect under your app:
 | Problem | Fix |
 |---------|-----|
 | “No signing certificate” | Xcode → Settings → Accounts → Manage Certificates → **+** Apple Distribution |
-| “Bundle ID not found” | Create app in App Store Connect with `com.xo.game`, or register ID at [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list) |
+| “Bundle ID not found” | Create app in App Store Connect with `com.tacxo.game`, or register ID at [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list) |
 | Archive button disabled | Select **Any iOS Device**, not a simulator |
 | Build stuck “Processing” | Wait up to an hour; check email for rejection reason |
 | Tests fail on CI/local | Ensure simulator name exists: `xcrun simctl list devices available` |

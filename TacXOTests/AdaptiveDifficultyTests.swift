@@ -1,5 +1,5 @@
 import XCTest
-@testable import XO
+@testable import TacXO
 
 final class AdaptiveDifficultyTests: XCTestCase {
     override func tearDown() {
