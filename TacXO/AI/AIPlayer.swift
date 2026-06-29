@@ -78,7 +78,10 @@ enum AIPlayer {
 
         let candidates = candidateCells(for: engine)
         guard candidates.count > 1 else {
-            return HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 0, total: 1))
+            return HumanMoveAssessment(
+                quality: .mediocre,
+                reason: .weakMove(rank: 0, total: 1)
+            )
         }
 
         let ranked = rankMoves(candidates, engine: engine)
@@ -91,6 +94,7 @@ enum AIPlayer {
         }
 
         let total = ranked.count
+        let moveScore = ranked[index].1
         let percentile = Double(index) / Double(max(total - 1, 1))
         let quality: HumanMoveQuality
         switch percentile {
@@ -100,6 +104,13 @@ enum AIPlayer {
         default: quality = .poor
         }
 
+        let notable = isTacticallyNotable(
+            moveScore: moveScore,
+            rank: index,
+            ranked: ranked,
+            stonesOnBoard: engine.cells.count
+        )
+
         let reason: HumanMoveReason
         switch quality {
         case .excellent, .good:
@@ -108,7 +119,34 @@ enum AIPlayer {
             reason = .weakMove(rank: index, total: total)
         }
 
-        return HumanMoveAssessment(quality: quality, reason: reason)
+        return HumanMoveAssessment(quality: quality, reason: reason, isTacticallyNotable: notable)
+    }
+
+    private static func isTacticallyNotable(
+        moveScore: Int,
+        rank: Int,
+        ranked: [(Cell, Int)],
+        stonesOnBoard: Int
+    ) -> Bool {
+        guard stonesOnBoard >= 4 else { return false }
+
+        if moveScore >= 5_000 { return true }
+
+        guard rank <= 1 else { return false }
+
+        let bestScore = ranked[0].1
+        let secondScore = ranked.count > 1 ? ranked[1].1 : Int.min
+
+        if rank == 1, bestScore - moveScore > 50 { return false }
+
+        if moveScore >= 2_500 { return true }
+
+        guard rank == 0, moveScore >= 900 else { return false }
+
+        if ranked.count >= 3, bestScore - ranked[2].1 < 120 { return false }
+        if ranked.count >= 2, bestScore - secondScore < 80 { return false }
+
+        return stonesOnBoard >= 6
     }
 
     private static func candidateCells(for engine: GameEngine) -> [Cell] {

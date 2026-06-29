@@ -85,7 +85,11 @@ final class MoveCommentTests: XCTestCase {
     }
 
     func testHappyAddressInVietnamese() {
-        let assessment = HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 4))
+        let assessment = HumanMoveAssessment(
+            quality: .excellent,
+            reason: .strongMove(rank: 0, total: 4),
+            isTacticallyNotable: true
+        )
         let text = NeighborMoveComments.comment(
             for: assessment,
             move: Cell(x: 0, y: 0),
@@ -96,7 +100,11 @@ final class MoveCommentTests: XCTestCase {
     }
 
     func testNormalAddressInVietnamese() {
-        let assessment = HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 1, total: 4))
+        let assessment = HumanMoveAssessment(
+            quality: .good,
+            reason: .strongMove(rank: 1, total: 4),
+            isTacticallyNotable: true
+        )
         let text = NeighborMoveComments.comment(
             for: assessment,
             move: Cell(x: 0, y: 0),
@@ -116,7 +124,11 @@ final class MoveCommentTests: XCTestCase {
         )
         XCTAssertNotNil(text)
         let excellent = NeighborMoveComments.comment(
-            for: HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 4)),
+            for: HumanMoveAssessment(
+                quality: .excellent,
+                reason: .strongMove(rank: 0, total: 4),
+                isTacticallyNotable: true
+            ),
             move: Cell(x: 2, y: 2),
             moveNumber: 3,
             language: .english
@@ -136,7 +148,11 @@ final class MoveCommentTests: XCTestCase {
     }
 
     func testCommentSelectionIsDeterministic() {
-        let assessment = HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 1, total: 4))
+        let assessment = HumanMoveAssessment(
+            quality: .good,
+            reason: .strongMove(rank: 1, total: 4),
+            isTacticallyNotable: true
+        )
         let move = Cell(x: 1, y: 2)
         let first = NeighborMoveComments.comment(
             for: assessment,
@@ -155,17 +171,70 @@ final class MoveCommentTests: XCTestCase {
 
     func testExcellentAndGoodUseDifferentPools() {
         let excellent = NeighborMoveComments.comment(
-            for: HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 4)),
+            for: HumanMoveAssessment(
+                quality: .excellent,
+                reason: .strongMove(rank: 0, total: 4),
+                isTacticallyNotable: true
+            ),
             move: Cell(x: 0, y: 0),
             moveNumber: 1,
             language: .english
         )
         let good = NeighborMoveComments.comment(
-            for: HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 1, total: 4)),
+            for: HumanMoveAssessment(
+                quality: .good,
+                reason: .strongMove(rank: 1, total: 4),
+                isTacticallyNotable: true
+            ),
             move: Cell(x: 0, y: 0),
             moveNumber: 1,
             language: .english
         )
         XCTAssertNotEqual(excellent, good)
+    }
+
+    func testQuietOpeningDoesNotComment() {
+        let engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .ten, mode: .vsNeighbor))
+        let assessment = AIPlayer.assessHumanMove(Cell(x: 5, y: 5), before: engine, hardness: 100)
+        XCTAssertFalse(assessment.shouldComment)
+        XCTAssertNil(
+            NeighborMoveComments.comment(
+                for: assessment,
+                move: Cell(x: 5, y: 5),
+                moveNumber: 0,
+                language: .english
+            )
+        )
+    }
+
+    func testRoutineMidgameMoveDoesNotComment() {
+        let engine = GameEngine(
+            settings: GameSettings(winLength: 5, boardSize: .ten, mode: .vsNeighbor),
+            cells: [
+                Cell(x: 5, y: 5): .x,
+                Cell(x: 5, y: 6): .o,
+                Cell(x: 6, y: 5): .x,
+                Cell(x: 4, y: 6): .o,
+            ],
+            currentPlayer: .x
+        )
+        let assessment = AIPlayer.assessHumanMove(Cell(x: 7, y: 5), before: engine, hardness: 100)
+        XCTAssertFalse(assessment.shouldComment)
+    }
+
+    func testBlockingOpponentWinComments() {
+        let engine = GameEngine(
+            settings: GameSettings(winLength: 5, boardSize: .ten, mode: .vsNeighbor),
+            cells: [
+                Cell(x: 4, y: 5): .o,
+                Cell(x: 5, y: 5): .o,
+                Cell(x: 6, y: 5): .o,
+                Cell(x: 7, y: 5): .o,
+                Cell(x: 5, y: 4): .x,
+            ],
+            currentPlayer: .x
+        )
+        let assessment = AIPlayer.assessHumanMove(Cell(x: 3, y: 5), before: engine, hardness: 100)
+        XCTAssertTrue(assessment.shouldComment)
     }
 }
