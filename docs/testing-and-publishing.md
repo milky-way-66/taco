@@ -4,7 +4,7 @@ This guide covers how to run and test **TacXO** on your Mac, distribute builds v
 
 | Item | Value |
 |------|-------|
-| Bundle ID | `com.tacxo.game` |
+| Bundle ID | `com.xo.game` |
 | Minimum iOS | 17.0 |
 | Xcode scheme | `TacXO` |
 | Project config | `project.yml` (regenerate with `xcodegen` after edits) |
@@ -107,7 +107,7 @@ TestFlight lets you install release builds on your own devices and share with be
    - **Platform:** iOS
    - **Name:** TacXO
    - **Primary language**
-   - **Bundle ID:** `com.tacxo.game` (must match `project.yml`)
+   - **Bundle ID:** `com.xo.game` (must match `project.yml`)
    - **SKU:** any unique string (e.g. `tacxo-game-001`)
 4. Create the app record. You do **not** need to submit for review yet.
 
@@ -116,7 +116,7 @@ TestFlight lets you install release builds on your own devices and share with be
 1. Open `TacXO.xcodeproj` → select the **TacXO** target → **Signing & Capabilities**.
 2. Enable **Automatically manage signing**.
 3. Select your **Team**.
-4. Confirm **Bundle Identifier** is `com.tacxo.game`.
+4. Confirm **Bundle Identifier** is `com.xo.game`.
 5. Repeat for **TacXOTests** if Xcode warns about signing (usually automatic).
 
 Xcode will create a Distribution certificate and App Store provisioning profile when you archive.
@@ -263,7 +263,7 @@ Complete these in App Store Connect under your app:
 | Problem | Fix |
 |---------|-----|
 | “No signing certificate” | Xcode → Settings → Accounts → Manage Certificates → **+** Apple Distribution |
-| “Bundle ID not found” | Create app in App Store Connect with `com.tacxo.game`, or register ID at [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list) |
+| “Bundle ID not found” | Create app in App Store Connect with `com.xo.game`, or register ID at [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list) |
 | Archive button disabled | Select **Any iOS Device**, not a simulator |
 | Build stuck “Processing” | Wait up to an hour; check email for rejection reason |
 | Tests fail on CI/local | Ensure simulator name exists: `xcrun simctl list devices available` |
