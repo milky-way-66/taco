@@ -17,7 +17,9 @@ struct PlayView: View {
 
                 BoardView(
                     engine: controller.engine,
-                    isInteractive: controller.engine.result == .ongoing && !isResettingBoard
+                    isInteractive: controller.engine.result == .ongoing
+                        && !isResettingBoard
+                        && !controller.isAIThinking
                 ) { cell in
                     controller.tap(cell: cell)
                 }
@@ -65,15 +67,23 @@ struct PlayView: View {
             .buttonStyle(.plain)
             .frame(width: 44, height: 44)
 
-            Text(statusLabel)
-                .font(.subheadline.weight(.medium))
-                .foregroundStyle(.primary)
-                .frame(maxWidth: .infinity)
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .minimumScaleFactor(0.85)
-                .contentTransition(.numericText())
-                .animation(GameTheme.newGameSpring, value: statusLabel)
+            Group {
+                if controller.isAIThinking {
+                    ThinkingIndicatorView()
+                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
+                } else {
+                    Text(statusLabel)
+                        .contentTransition(.numericText())
+                }
+            }
+            .font(.subheadline.weight(.medium))
+            .foregroundStyle(.primary)
+            .frame(maxWidth: .infinity)
+            .multilineTextAlignment(.center)
+            .lineLimit(1)
+            .minimumScaleFactor(0.85)
+            .animation(GameTheme.newGameSpring, value: statusLabel)
+            .animation(GameTheme.thinkingPulse, value: controller.isAIThinking)
 
             Button {
                 startNewGame()

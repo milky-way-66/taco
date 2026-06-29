@@ -3,6 +3,8 @@ import Observation
 
 @Observable
 final class GameController {
+    private static let aiMinimumThinkDuration: Duration = .milliseconds(850)
+
     var settings: GameSettings
     private(set) var engine: GameEngine
     private(set) var difficulty = AdaptiveDifficulty()
@@ -58,16 +60,14 @@ final class GameController {
         Task { @MainActor in
             defer { isAIThinking = false }
 
-            try? await Task.sleep(for: .milliseconds(220))
-
-            guard engine.result == .ongoing else { return }
-
-            let aiMove = await Task.detached(priority: .userInitiated) {
+            async let aiMove = Task.detached(priority: .userInitiated) {
                 AIPlayer.bestMove(for: snapshot, difficulty: level)
             }.value
 
+            try? await Task.sleep(for: Self.aiMinimumThinkDuration)
+
             guard engine.result == .ongoing else { return }
-            performMove(at: aiMove)
+            performMove(at: await aiMove)
         }
     }
 

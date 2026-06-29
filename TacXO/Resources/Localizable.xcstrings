@@ -301,6 +301,22 @@
         }
       }
     },
+    "neighbor_thinking" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neighbor is thinking"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ông hàng xóm đang suy nghĩ"
+          }
+        }
+      }
+    },
     "new_game" : {
       "localizations" : {
         "en" : {

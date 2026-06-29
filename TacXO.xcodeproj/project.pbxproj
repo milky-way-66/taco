@@ -27,6 +27,7 @@
 		853590898FF9DC322A051994 /* AdaptiveDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A1B07642E0E2F4EDE30E68 /* AdaptiveDifficulty.swift */; };
 		8CCE4936C88B2E2B5A4399C3 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FC4226CBB4D1A6DC491C7B /* Mark.swift */; };
 		9131D1E60AA572A1DC1A7F19 /* WinCelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */; };
+		9D633008C4E98C74D5D5C2EE /* ThinkingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11623B32593D5F24946899CA /* ThinkingIndicatorView.swift */; };
 		A0FB9A57E05B3AD4678EE498 /* NeighborQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */; };
 		B0824588F3B393345460AD48 /* AdaptiveDifficultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */; };
 		B3996018154EFEDAD6D49353 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */; };
@@ -56,7 +57,8 @@
 
 /* Begin PBXFileReference section */
 		051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotes.swift; sourceTree = "<group>"; };
-		0EB21894C197E44771C9E74F /* TacXOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TacXOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EB21894C197E44771C9E74F /* TacXOTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TacXOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11623B32593D5F24946899CA /* ThinkingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingIndicatorView.swift; sourceTree = "<group>"; };
 		18E76001B409E6A8FEB6C9F7 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCelebrationView.swift; sourceTree = "<group>"; };
 		2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
@@ -79,7 +81,7 @@
 		A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		A9619A3FCE5E71572CDE01CF /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
 		AA6310856F6ACD8839F5B9DF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
-		B0214435EEDFC1525D908CFF /* TacXO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacXO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0214435EEDFC1525D908CFF /* TacXO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TacXO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB5A7AC06360F0DA248B836 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		D554D0DFD010F3690343738C /* neighbor_loss_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_1.wav; sourceTree = "<group>"; };
 		D5574D8ACC4CCF6B3BFABD60 /* QuoteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteOverlayView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				AA6310856F6ACD8839F5B9DF /* PlayView.swift */,
 				D5574D8ACC4CCF6B3BFABD60 /* QuoteOverlayView.swift */,
 				7E0CAB53DCD7947D5E099CD4 /* SettingsView.swift */,
+				11623B32593D5F24946899CA /* ThinkingIndicatorView.swift */,
 				222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */,
 			);
 			path = Views;
@@ -264,7 +267,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 1A42397A91F8771181E90F51 /* Build configuration list for PBXProject "TacXO" */;
 			developmentRegion = en;
@@ -342,6 +347,7 @@
 				596793A4184AD78F53388E06 /* SettingsView.swift in Sources */,
 				16C3CBADC200EC32C843A594 /* SoundManager.swift in Sources */,
 				5D3CACC0A93792A3A4ECD2E2 /* TacXOApp.swift in Sources */,
+				9D633008C4E98C74D5D5C2EE /* ThinkingIndicatorView.swift in Sources */,
 				9131D1E60AA572A1DC1A7F19 /* WinCelebrationView.swift in Sources */,
 				EEE236BF844F116C4002821C /* WinChecker.swift in Sources */,
 			);
@@ -362,7 +368,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -393,10 +398,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -406,11 +411,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -422,7 +427,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -433,7 +437,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xo.game;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tacxo.game;
 				PRODUCT_NAME = TacXO;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -445,7 +449,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -476,10 +479,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -495,12 +498,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -548,7 +551,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -559,7 +561,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xo.game;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tacxo.game;
 				PRODUCT_NAME = TacXO;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;

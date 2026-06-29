@@ -15,6 +15,7 @@ enum GameTheme {
     static let overlaySpring = Animation.smooth(duration: 0.55)
     static let newGameSpring = Animation.spring(response: 0.55, dampingFraction: 0.82)
     static let newGameExit = Animation.easeIn(duration: 0.24)
+    static let thinkingPulse = Animation.easeInOut(duration: 0.32)
 
     static func cellSize(dimension: Int, availableSize: CGSize) -> CGFloat {
         let horizontalInset: CGFloat = 20
