@@ -11,9 +11,11 @@
 		16C199423DE0CF4697D13DF2 /* neighbor_loss_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 63FA3059405EA6494C270703 /* neighbor_loss_1.wav */; };
 		1E08C52FECAF048A133086E5 /* NeighborQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB010BD99DDE3C0198AA6E /* NeighborQuotes.swift */; };
 		1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */; };
+		336A2B59FDE68A91D3602D4B /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74702309C952E8CA39FD0259 /* PlayView.swift */; };
 		3E2BC5CE9E98FDA405D30147 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B152FD1E643381B7B6917EC /* CellView.swift */; };
 		546EBB507065C480B7BF0E89 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D415FD94C7117BD37D9550 /* Mark.swift */; };
 		5DD54AE8E1910DC321207529 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5395604C4C610FC40AF4B77 /* GameController.swift */; };
+		643062BA4320B0D22DFC877C /* LossOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331B1CD0958B782C6333E04F /* LossOverlayView.swift */; };
 		6F6708C3E8FA0B93ED9FFA15 /* AdaptiveDifficultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */; };
 		727E5FC52FEC0168AAE124E6 /* AdaptiveDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2225CFCB315112139CE23 /* AdaptiveDifficulty.swift */; };
 		76FE18E6182BD09130F1AA69 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC76F537734563C94355C /* AIPlayer.swift */; };
@@ -27,6 +29,7 @@
 		9E317C01D6995400D1AD0977 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76B40659468440F8E88D1D9 /* GameEngineTests.swift */; };
 		A068E16F56AD66DC7E10AEB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C72F1AF0C5167BCFD382DB7D /* Assets.xcassets */; };
 		C741DDBD93C43AA86634BF9C /* WinChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B707A365702F0C0AA4AABE /* WinChecker.swift */; };
+		CEFCE0E0B7EA3388B9247AB0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708A4322D3CC38EFD815ED0 /* SettingsView.swift */; };
 		D0B90B44F9ABC9193234AC2C /* neighbor_loss_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1C1A0E3B574158A243327 /* neighbor_loss_3.wav */; };
 		DD88585EBD868D7D93B7D896 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8DB6656A86FB5A4452A88 /* Cell.swift */; };
 		EA8A7C134EAD275BB9A5B7C5 /* WinCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B1C39D49EFF422FB3368 /* WinCheckerTests.swift */; };
@@ -45,6 +48,7 @@
 /* Begin PBXFileReference section */
 		1CC1C1A0E3B574158A243327 /* neighbor_loss_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_3.wav; sourceTree = "<group>"; };
 		218F43BEE4F064BFA48BFDE2 /* AIPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayerTests.swift; sourceTree = "<group>"; };
+		331B1CD0958B782C6333E04F /* LossOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossOverlayView.swift; sourceTree = "<group>"; };
 		43C3B1C39D49EFF422FB3368 /* WinCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCheckerTests.swift; sourceTree = "<group>"; };
 		447E38A4D1701E0FB2F067AB /* XOApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XOApp.swift; sourceTree = "<group>"; };
 		483AB6EAD73515789D7648BF /* XO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +56,7 @@
 		623B33E51A275E5A808EBB9E /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		63FA3059405EA6494C270703 /* neighbor_loss_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_1.wav; sourceTree = "<group>"; };
 		68DBBDF76611B37202BB4F57 /* XOTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		74702309C952E8CA39FD0259 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		7EBB010BD99DDE3C0198AA6E /* NeighborQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotes.swift; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 		A5395604C4C610FC40AF4B77 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		A76B40659468440F8E88D1D9 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		AAF6CCEF738CE17013BE9C3A /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
+		B708A4322D3CC38EFD815ED0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BA2C771B7FDCBD28AC97D64B /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		BDFB9FC4EC58590329F9F07D /* XOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XOTests.swift; sourceTree = "<group>"; };
 		C72F1AF0C5167BCFD382DB7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +127,9 @@
 			children = (
 				EACBBCB34E354ACE837EC139 /* BoardView.swift */,
 				5B152FD1E643381B7B6917EC /* CellView.swift */,
+				331B1CD0958B782C6333E04F /* LossOverlayView.swift */,
+				74702309C952E8CA39FD0259 /* PlayView.swift */,
+				B708A4322D3CC38EFD815ED0 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,8 +289,11 @@
 				5DD54AE8E1910DC321207529 /* GameController.swift in Sources */,
 				1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */,
 				79A7FC042FF2040C0496E632 /* GameSettings.swift in Sources */,
+				643062BA4320B0D22DFC877C /* LossOverlayView.swift in Sources */,
 				546EBB507065C480B7BF0E89 /* Mark.swift in Sources */,
 				1E08C52FECAF048A133086E5 /* NeighborQuotes.swift in Sources */,
+				336A2B59FDE68A91D3602D4B /* PlayView.swift in Sources */,
+				CEFCE0E0B7EA3388B9247AB0 /* SettingsView.swift in Sources */,
 				94AD31BB68BFE3169B245C59 /* SoundManager.swift in Sources */,
 				C741DDBD93C43AA86634BF9C /* WinChecker.swift in Sources */,
 				8BC27882F2A819217D167114 /* XOApp.swift in Sources */,
