@@ -22,6 +22,13 @@ struct GameEngine {
         self.settings = settings
     }
 
+    internal init(settings: GameSettings, cells: [Cell: Mark], currentPlayer: Mark, result: GameResult = .ongoing) {
+        self.settings = settings
+        self.cells = cells
+        self.currentPlayer = currentPlayer
+        self.result = result
+    }
+
     func canPlay(at cell: Cell) -> Bool {
         guard result == .ongoing else { return false }
         guard isInBounds(cell) else { return false }

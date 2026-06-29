@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04F13194AD1A9E19D74DB5AF /* AIPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F43BEE4F064BFA48BFDE2 /* AIPlayerTests.swift */; };
 		1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */; };
 		546EBB507065C480B7BF0E89 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D415FD94C7117BD37D9550 /* Mark.swift */; };
 		6F6708C3E8FA0B93ED9FFA15 /* AdaptiveDifficultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */; };
 		727E5FC52FEC0168AAE124E6 /* AdaptiveDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2225CFCB315112139CE23 /* AdaptiveDifficulty.swift */; };
+		76FE18E6182BD09130F1AA69 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC76F537734563C94355C /* AIPlayer.swift */; };
 		79A7FC042FF2040C0496E632 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B33E51A275E5A808EBB9E /* GameSettings.swift */; };
 		8540275BC6FFE9D6CF4F99A1 /* XOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFB9FC4EC58590329F9F07D /* XOTests.swift */; };
 		8BC27882F2A819217D167114 /* XOApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E38A4D1701E0FB2F067AB /* XOApp.swift */; };
@@ -32,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		218F43BEE4F064BFA48BFDE2 /* AIPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayerTests.swift; sourceTree = "<group>"; };
 		43C3B1C39D49EFF422FB3368 /* WinCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCheckerTests.swift; sourceTree = "<group>"; };
 		447E38A4D1701E0FB2F067AB /* XOApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XOApp.swift; sourceTree = "<group>"; };
 		483AB6EAD73515789D7648BF /* XO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +43,7 @@
 		7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		85D415FD94C7117BD37D9550 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		9D6AC76F537734563C94355C /* AIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayer.swift; sourceTree = "<group>"; };
 		A76B40659468440F8E88D1D9 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		BDFB9FC4EC58590329F9F07D /* XOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XOTests.swift; sourceTree = "<group>"; };
 		C72F1AF0C5167BCFD382DB7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				CAC2225CFCB315112139CE23 /* AdaptiveDifficulty.swift */,
+				9D6AC76F537734563C94355C /* AIPlayer.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */,
+				218F43BEE4F064BFA48BFDE2 /* AIPlayerTests.swift */,
 				A76B40659468440F8E88D1D9 /* GameEngineTests.swift */,
 				43C3B1C39D49EFF422FB3368 /* WinCheckerTests.swift */,
 				BDFB9FC4EC58590329F9F07D /* XOTests.swift */,
@@ -211,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76FE18E6182BD09130F1AA69 /* AIPlayer.swift in Sources */,
 				727E5FC52FEC0168AAE124E6 /* AdaptiveDifficulty.swift in Sources */,
 				DD88585EBD868D7D93B7D896 /* Cell.swift in Sources */,
 				1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */,
@@ -225,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F13194AD1A9E19D74DB5AF /* AIPlayerTests.swift in Sources */,
 				6F6708C3E8FA0B93ED9FFA15 /* AdaptiveDifficultyTests.swift in Sources */,
 				9E317C01D6995400D1AD0977 /* GameEngineTests.swift in Sources */,
 				EA8A7C134EAD275BB9A5B7C5 /* WinCheckerTests.swift in Sources */,
