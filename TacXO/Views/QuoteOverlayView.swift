@@ -84,11 +84,16 @@ struct QuoteOverlayView: View {
             .padding(.bottom, 12)
             .frame(maxWidth: .infinity)
             .background {
-                LinearGradient(
-                    colors: palette.panelGradient,
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                ZStack {
+                    Rectangle()
+                        .fill(palette.backdropMaterial)
+
+                    LinearGradient(
+                        colors: palette.panelGradient,
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
                 .ignoresSafeArea(edges: .bottom)
             }
         }
@@ -152,6 +157,7 @@ private struct QuotePalette {
     let line: Color
     let panelGradient: [Color]
     let hint: Color
+    let backdropMaterial: Material
 
     static let victory = QuotePalette(
         title: Color(red: 0.85, green: 0.68, blue: 0.22),
@@ -161,11 +167,12 @@ private struct QuotePalette {
         explanation: Color(red: 0.28, green: 0.38, blue: 0.52).opacity(0.85),
         line: Color(red: 0.85, green: 0.68, blue: 0.22),
         panelGradient: [
-            Color.white.opacity(0),
+            Color.white.opacity(0.72),
             Color.white.opacity(0.94),
             Color(red: 0.95, green: 0.97, blue: 1.0)
         ],
-        hint: Color(red: 0.18, green: 0.36, blue: 0.62).opacity(0.6)
+        hint: Color(red: 0.18, green: 0.36, blue: 0.62).opacity(0.6),
+        backdropMaterial: .thickMaterial
     )
 
     static let defeat = QuotePalette(
@@ -176,10 +183,11 @@ private struct QuotePalette {
         explanation: Color.white.opacity(0.48),
         line: Color(red: 0.82, green: 0.22, blue: 0.22),
         panelGradient: [
-            Color.black.opacity(0),
-            Color(red: 0.1, green: 0.05, blue: 0.07).opacity(0.92),
-            Color(red: 0.06, green: 0.04, blue: 0.05)
+            Color.black.opacity(0.35),
+            Color(red: 0.1, green: 0.05, blue: 0.07).opacity(0.88),
+            Color(red: 0.06, green: 0.04, blue: 0.05).opacity(0.96)
         ],
-        hint: Color.white.opacity(0.38)
+        hint: Color.white.opacity(0.38),
+        backdropMaterial: .ultraThickMaterial
     )
 }

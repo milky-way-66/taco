@@ -2,16 +2,19 @@ import XCTest
 @testable import TacXO
 
 final class AIPlayerTests: XCTestCase {
-    func testTakesWinningMoveOn3x3() {
-        var engine = GameEngine(settings: GameSettings(winLength: 3, boardSize: .three, mode: .vsNeighbor))
-        _ = try? engine.place(at: Cell(x: 0, y: 0)) // human x
-        _ = try? engine.place(at: Cell(x: 1, y: 0)) // ai o
-        _ = try? engine.place(at: Cell(x: 2, y: 1)) // human x
-        _ = try? engine.place(at: Cell(x: 0, y: 1)) // ai o
-        _ = try? engine.place(at: Cell(x: 1, y: 2)) // human x — threat diagonal
+    func testBlocksOpponentWinOn3x3() {
+        let engine = GameEngine(
+            settings: GameSettings(winLength: 3, boardSize: .three, mode: .vsNeighbor),
+            cells: [
+                Cell(x: 0, y: 0): .x,
+                Cell(x: 1, y: 0): .x,
+                Cell(x: 0, y: 1): .o
+            ],
+            currentPlayer: .o
+        )
 
         let move = AIPlayer.bestMove(for: engine, difficulty: 5)
-        XCTAssertEqual(move, Cell(x: 1, y: 1)) // ai blocks
+        XCTAssertEqual(move, Cell(x: 2, y: 0))
     }
 
     func testTakesImmediateWin() {

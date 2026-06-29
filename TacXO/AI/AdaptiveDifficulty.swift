@@ -3,7 +3,7 @@ import Foundation
 struct AdaptiveDifficulty {
     private static let levelKey = "xo.neighbor.difficulty"
     private static let lossStreakKey = "xo.neighbor.lossStreak"
-    private static let lossesPerDrop = 4
+    private static let lossesPerDrop = 6
 
     private(set) var level: Int
     private var lossStreak: Int

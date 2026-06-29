@@ -12,9 +12,9 @@ final class AdaptiveDifficultyTests: XCTestCase {
         XCTAssertEqual(d.level, 5)
     }
 
-    func testDecreaseEveryFourLossesFloorsAtZero() {
+    func testDecreaseEverySixLossesFloorsAtZero() {
         var d = AdaptiveDifficulty()
-        for _ in 0..<24 { d.recordLoss() }
+        for _ in 0..<30 { d.recordLoss() }
         XCTAssertEqual(d.level, 0)
     }
 
@@ -24,9 +24,9 @@ final class AdaptiveDifficultyTests: XCTestCase {
         XCTAssertEqual(d.level, 5)
     }
 
-    func testFourthLossDecreasesOnce() {
+    func testSixthLossDecreasesOnce() {
         var d = AdaptiveDifficulty()
-        for _ in 0..<4 { d.recordLoss() }
+        for _ in 0..<6 { d.recordLoss() }
         XCTAssertEqual(d.level, 4)
     }
 
@@ -47,7 +47,7 @@ final class AdaptiveDifficultyTests: XCTestCase {
 
     func testPersistsAcrossInstances() {
         var d = AdaptiveDifficulty()
-        for _ in 0..<4 { d.recordLoss() }
+        for _ in 0..<6 { d.recordLoss() }
         let d2 = AdaptiveDifficulty()
         XCTAssertEqual(d2.level, 4)
     }

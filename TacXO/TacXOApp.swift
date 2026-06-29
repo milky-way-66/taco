@@ -8,6 +8,7 @@ struct TacXOApp: App {
         WindowGroup {
             PlayView(controller: controller)
                 .environment(\.locale, controller.settings.language.locale)
+                .preferredColorScheme(.light)
                 .onAppear {
                     _ = SoundManager.shared
                 }

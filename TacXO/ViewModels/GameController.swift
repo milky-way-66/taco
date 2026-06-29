@@ -3,7 +3,10 @@ import Observation
 
 @Observable
 final class GameController {
-    private static let aiMinimumThinkDuration: Duration = .milliseconds(850)
+    /// Neighbor’s first move feels snappy; later moves ramp up but stay under 800ms.
+    private static let aiThinkBaseMs = 100
+    private static let aiThinkStepMs = 100
+    private static let aiThinkMaxMs = 800
 
     var settings: GameSettings
     private(set) var engine: GameEngine
@@ -56,6 +59,8 @@ final class GameController {
         isAIThinking = true
         let snapshot = engine
         let level = difficulty.level
+        let oMovesPlayed = snapshot.cells.values.filter { $0 == .o }.count
+        let thinkDuration = Self.aiThinkDuration(oMovesPlayed: oMovesPlayed)
 
         Task { @MainActor in
             defer { isAIThinking = false }
@@ -64,7 +69,7 @@ final class GameController {
                 AIPlayer.bestMove(for: snapshot, difficulty: level)
             }.value
 
-            try? await Task.sleep(for: Self.aiMinimumThinkDuration)
+            try? await Task.sleep(for: thinkDuration)
 
             guard engine.result == .ongoing else { return }
             performMove(at: await aiMove)
@@ -110,6 +115,11 @@ final class GameController {
 
     private func presentQuote(_ quote: NeighborQuote, kind: QuoteOverlayKind) {
         quoteOverlay = QuoteOverlay(quote: quote, kind: kind)
+    }
+
+    private static func aiThinkDuration(oMovesPlayed: Int) -> Duration {
+        let milliseconds = min(aiThinkMaxMs, aiThinkBaseMs + oMovesPlayed * aiThinkStepMs)
+        return .milliseconds(milliseconds)
     }
 }
 
