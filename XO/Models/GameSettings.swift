@@ -4,17 +4,28 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
     case three = "3×3"
     case five = "5×5"
     case ten = "10×10"
-    case infinite = "∞"
+    case twentyFive = "25×25"
 
     var id: String { rawValue }
 
-    /// nil means unbounded (infinite mode)
-    var dimension: Int? {
+    var dimension: Int {
         switch self {
         case .three: return 3
         case .five: return 5
         case .ten: return 10
-        case .infinite: return nil
+        case .twentyFive: return 25
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        if let size = BoardSize(rawValue: value) {
+            self = size
+        } else if value == "∞" {
+            self = .twentyFive
+        } else {
+            self = .five
         }
     }
 }

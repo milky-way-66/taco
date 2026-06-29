@@ -28,6 +28,12 @@ final class SoundManager {
 
     func playWin() {
         successHaptic()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        }
     }
 
     private func preload(_ name: String) {

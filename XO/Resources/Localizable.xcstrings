@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "○" : {
+
+    },
+    "✕" : {
+
+    },
     "board_picker_label" : {
       "localizations" : {
         "en" : {
@@ -50,6 +56,7 @@
       }
     },
     "draw" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -82,6 +89,7 @@
       }
     },
     "language_english" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -114,6 +122,7 @@
       }
     },
     "language_system" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -130,6 +139,7 @@
       }
     },
     "language_vietnamese" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -141,6 +151,86 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tiếng Việt"
+          }
+        }
+      }
+    },
+    "loss_defeated" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEFEATED"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "THUA CUỘC"
+          }
+        }
+      }
+    },
+    "loss_neighbor_says" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "THE NEIGHBOR REMARKS"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HÀNG XÓM NÓI"
+          }
+        }
+      }
+    },
+    "loss_tap_continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TAP TO CONTINUE"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CHẠM ĐỂ TIẾP TỤC"
+          }
+        }
+      }
+    },
+    "win_victory" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VICTORY"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CHIẾN THẮNG"
+          }
+        }
+      }
+    },
+    "win_neighbor_mutters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "THE NEIGHBOR MUTTERS"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HÀNG XÓM LẨM BẨM"
           }
         }
       }
@@ -178,6 +268,7 @@
       }
     },
     "mode_two_player" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -194,6 +285,7 @@
       }
     },
     "mode_vs_neighbor" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

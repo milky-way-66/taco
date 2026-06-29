@@ -13,10 +13,11 @@ enum AIPlayer {
     }
 
     private static func candidateCells(for engine: GameEngine) -> [Cell] {
-        if let dim = engine.settings.boardSize.dimension {
-            return allCellsInBounds(dimension: dim).filter { engine.canPlay(at: $0) }
+        let dim = engine.settings.boardSize.dimension
+        if dim > 10 {
+            return neighborhoodCandidates(engine: engine, dimension: dim)
         }
-        return localCandidates(engine: engine)
+        return allCellsInBounds(dimension: dim).filter { engine.canPlay(at: $0) }
     }
 
     private static func allCellsInBounds(dimension: Int) -> [Cell] {
@@ -25,16 +26,22 @@ enum AIPlayer {
         }
     }
 
-    private static func localCandidates(engine: GameEngine) -> [Cell] {
+    private static func neighborhoodCandidates(engine: GameEngine, dimension: Int) -> [Cell] {
         guard !engine.cells.isEmpty else {
-            return (0..<7).flatMap { y in (0..<7).map { x in Cell(x: x, y: y) } }
+            let center = dimension / 2
+            return (-2...2).flatMap { dy in
+                (-2...2).map { dx in Cell(x: center + dx, y: center + dy) }
+            }.filter { engine.canPlay(at: $0) }
         }
+
         var set = Set<Cell>()
         for (cell, _) in engine.cells {
             for dx in -2...2 {
                 for dy in -2...2 {
-                    let c = Cell(x: cell.x + dx, y: cell.y + dy)
-                    if engine.canPlay(at: c) { set.insert(c) }
+                    let candidate = Cell(x: cell.x + dx, y: cell.y + dy)
+                    if engine.canPlay(at: candidate) {
+                        set.insert(candidate)
+                    }
                 }
             }
         }
@@ -57,7 +64,6 @@ enum AIPlayer {
         default:
             break
         }
-        // Block opponent win
         let opponentCopy = GameEngine(
             settings: engine.settings,
             cells: engine.cells,
@@ -82,15 +88,11 @@ enum AIPlayer {
     }
 
     private static func heuristic(move: Cell, engine: GameEngine) -> Int {
-        var copy = engine
-        _ = try? copy.place(at: move)
-        let centerBias = engine.settings.boardSize.dimension.map { dim in
-            let cx = Double(dim - 1) / 2
-            let cy = cx
-            let dist = abs(Double(move.x) - cx) + abs(Double(move.y) - cy)
-            return Int(10 - dist)
-        } ?? 0
-        return centerBias
+        let dim = engine.settings.boardSize.dimension
+        let cx = Double(dim - 1) / 2
+        let cy = cx
+        let dist = abs(Double(move.x) - cx) + abs(Double(move.y) - cy)
+        return Int(10 - dist)
     }
 
     private static func selectMove(from ranked: [(Cell, Int)], difficulty: Int) -> Cell {

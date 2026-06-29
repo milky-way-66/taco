@@ -23,6 +23,13 @@ final class WinCheckerTests: XCTestCase {
         XCTAssertTrue(WinChecker.hasWin(at: Cell(x: 2, y: 2), mark: .x, cells: cells, winLength: 3))
     }
 
+    func testWinningLine() {
+        var cells: [Cell: Mark] = [:]
+        for x in 0..<5 { cells[Cell(x: x, y: 0)] = .x }
+        let line = WinChecker.winningLine(at: Cell(x: 4, y: 0), mark: .x, cells: cells, winLength: 5)
+        XCTAssertEqual(line?.count, 5)
+    }
+
     func testNoWinYet() {
         var cells: [Cell: Mark] = [:]
         cells[Cell(x: 0, y: 0)] = .x

@@ -20,7 +20,16 @@ final class NeighborQuotesTests: XCTestCase {
         XCTAssertTrue(quotes.contains(where: { $0.contains("dog") || $0.contains("thinking") }))
     }
 
-    func testEachQuoteHasBilingualExplanations() {
+    func testEachWinQuoteHasBilingualExplanations() {
+        for quote in NeighborWinQuotes.all {
+            XCTAssertFalse(quote.explanationEnglish.isEmpty)
+            XCTAssertFalse(quote.explanationVietnamese.isEmpty)
+            XCTAssertFalse(quote.english.isEmpty)
+            XCTAssertFalse(quote.vietnamese.isEmpty)
+        }
+    }
+
+    func testEachLossQuoteHasBilingualExplanations() {
         for quote in NeighborQuotes.all {
             XCTAssertFalse(quote.explanationEnglish.isEmpty)
             XCTAssertFalse(quote.explanationVietnamese.isEmpty)

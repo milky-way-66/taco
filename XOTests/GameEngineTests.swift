@@ -60,9 +60,14 @@ final class GameEngineTests: XCTestCase {
         XCTAssertEqual(engine.currentPlayer, .x)
     }
 
-    func testInfiniteAllowsAnyCoordinate() throws {
-        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .infinite, mode: .twoPlayer))
-        let result = try engine.place(at: Cell(x: 100, y: -50))
+    func testRejectsOutOfBoundsOn25x25() {
+        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .twoPlayer))
+        XCTAssertThrowsError(try engine.place(at: Cell(x: 25, y: 0)))
+    }
+
+    func testTwentyFiveBoardAcceptsValidCell() throws {
+        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .twoPlayer))
+        let result = try engine.place(at: Cell(x: 12, y: 12))
         XCTAssertEqual(result, .ongoing)
     }
 }

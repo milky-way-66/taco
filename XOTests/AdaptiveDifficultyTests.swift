@@ -4,6 +4,7 @@ import XCTest
 final class AdaptiveDifficultyTests: XCTestCase {
     override func tearDown() {
         UserDefaults.standard.removeObject(forKey: "xo.neighbor.difficulty")
+        UserDefaults.standard.removeObject(forKey: "xo.neighbor.lossStreak")
     }
 
     func testDefaultLevelIsFive() {
@@ -11,25 +12,43 @@ final class AdaptiveDifficultyTests: XCTestCase {
         XCTAssertEqual(d.level, 5)
     }
 
-    func testDecreaseOnLossFloorsAtZero() {
+    func testDecreaseEveryFourLossesFloorsAtZero() {
         var d = AdaptiveDifficulty()
-        for _ in 0..<10 { d.recordLoss() }
+        for _ in 0..<24 { d.recordLoss() }
         XCTAssertEqual(d.level, 0)
+    }
+
+    func testSingleLossDoesNotDecrease() {
+        var d = AdaptiveDifficulty()
+        d.recordLoss()
+        XCTAssertEqual(d.level, 5)
+    }
+
+    func testFourthLossDecreasesOnce() {
+        var d = AdaptiveDifficulty()
+        for _ in 0..<4 { d.recordLoss() }
+        XCTAssertEqual(d.level, 4)
     }
 
     func testIncreaseOnWinCapsAtFive() {
         var d = AdaptiveDifficulty()
-        d.recordLoss()
-        d.recordLoss()
+        for _ in 0..<8 { d.recordLoss() }
         for _ in 0..<10 { d.recordWin() }
+        XCTAssertEqual(d.level, 5)
+    }
+
+    func testWinResetsLossStreak() {
+        var d = AdaptiveDifficulty()
+        for _ in 0..<3 { d.recordLoss() }
+        d.recordWin()
+        d.recordLoss()
         XCTAssertEqual(d.level, 5)
     }
 
     func testPersistsAcrossInstances() {
         var d = AdaptiveDifficulty()
-        d.recordLoss()
-        d.recordLoss()
+        for _ in 0..<4 { d.recordLoss() }
         let d2 = AdaptiveDifficulty()
-        XCTAssertEqual(d2.level, 3)
+        XCTAssertEqual(d2.level, 4)
     }
 }

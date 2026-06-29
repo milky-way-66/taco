@@ -34,7 +34,6 @@ struct SettingsView: View {
                             Text(size.rawValue).tag(size)
                         }
                     }
-                    .pickerStyle(.segmented)
                 }
                 Section(String(localized: "mode_section")) {
                     Picker(String(localized: "mode_picker_label"), selection: $draft.mode) {
