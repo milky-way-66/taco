@@ -12,6 +12,7 @@
 		1E08C52FECAF048A133086E5 /* NeighborQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB010BD99DDE3C0198AA6E /* NeighborQuotes.swift */; };
 		1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */; };
 		546EBB507065C480B7BF0E89 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D415FD94C7117BD37D9550 /* Mark.swift */; };
+		5DD54AE8E1910DC321207529 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5395604C4C610FC40AF4B77 /* GameController.swift */; };
 		6F6708C3E8FA0B93ED9FFA15 /* AdaptiveDifficultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E0889878A1C3BD6EB34A0 /* AdaptiveDifficultyTests.swift */; };
 		727E5FC52FEC0168AAE124E6 /* AdaptiveDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC2225CFCB315112139CE23 /* AdaptiveDifficulty.swift */; };
 		76FE18E6182BD09130F1AA69 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC76F537734563C94355C /* AIPlayer.swift */; };
@@ -53,6 +54,7 @@
 		7EBB010BD99DDE3C0198AA6E /* NeighborQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotes.swift; sourceTree = "<group>"; };
 		85D415FD94C7117BD37D9550 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
 		9D6AC76F537734563C94355C /* AIPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayer.swift; sourceTree = "<group>"; };
+		A5395604C4C610FC40AF4B77 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		A76B40659468440F8E88D1D9 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		AAF6CCEF738CE17013BE9C3A /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
 		BA2C771B7FDCBD28AC97D64B /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
+		A2416DEBDFB399F6D2C69CAB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A5395604C4C610FC40AF4B77 /* GameController.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A4B13D8AD4464D97E9B68138 /* Personality */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 				1D23FF024ED0A62A29DCC015 /* Models */,
 				A4B13D8AD4464D97E9B68138 /* Personality */,
 				DADF71C910D39F01435465A1 /* Resources */,
+				A2416DEBDFB399F6D2C69CAB /* ViewModels */,
 			);
 			path = XO;
 			sourceTree = "<group>";
@@ -250,6 +261,7 @@
 				76FE18E6182BD09130F1AA69 /* AIPlayer.swift in Sources */,
 				727E5FC52FEC0168AAE124E6 /* AdaptiveDifficulty.swift in Sources */,
 				DD88585EBD868D7D93B7D896 /* Cell.swift in Sources */,
+				5DD54AE8E1910DC321207529 /* GameController.swift in Sources */,
 				1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */,
 				79A7FC042FF2040C0496E632 /* GameSettings.swift in Sources */,
 				546EBB507065C480B7BF0E89 /* Mark.swift in Sources */,
