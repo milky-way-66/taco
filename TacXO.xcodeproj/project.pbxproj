@@ -65,7 +65,7 @@
 		051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotes.swift; sourceTree = "<group>"; };
 		05D038008BF4660E34AAB50C /* HardnessViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardnessViews.swift; sourceTree = "<group>"; };
 		0DAB25A1FB6E33229FBD3D0D /* NeighborComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborComment.swift; sourceTree = "<group>"; };
-		0EB21894C197E44771C9E74F /* TacXOTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TacXOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EB21894C197E44771C9E74F /* TacXOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TacXOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E76001B409E6A8FEB6C9F7 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCelebrationView.swift; sourceTree = "<group>"; };
 		2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		A9619A3FCE5E71572CDE01CF /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
 		AA6310856F6ACD8839F5B9DF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
-		B0214435EEDFC1525D908CFF /* TacXO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TacXO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0214435EEDFC1525D908CFF /* TacXO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacXO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C200C0B8C871F56CC065A771 /* NeighborSpeechBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechBubbleView.swift; sourceTree = "<group>"; };
 		CBB5A7AC06360F0DA248B836 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		D554D0DFD010F3690343738C /* neighbor_loss_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_1.wav; sourceTree = "<group>"; };
@@ -286,8 +286,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 1A42397A91F8771181E90F51 /* Build configuration list for PBXProject "TacXO" */;
 			developmentRegion = en;
@@ -451,6 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -540,6 +539,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -558,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -577,6 +578,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XH2KLNMPF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
