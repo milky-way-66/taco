@@ -4,7 +4,6 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
     case three = "3×3"
     case five = "5×5"
     case ten = "10×10"
-    case twentyFive = "25×25"
 
     var id: String { rawValue }
 
@@ -13,7 +12,6 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
         case .three: return 3
         case .five: return 5
         case .ten: return 10
-        case .twentyFive: return 25
         }
     }
 
@@ -22,10 +20,10 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
         let value = try container.decode(String.self)
         if let size = BoardSize(rawValue: value) {
             self = size
-        } else if value == "∞" {
-            self = .twentyFive
+        } else if value == "∞" || value == "25×25" {
+            self = .ten
         } else {
-            self = .five
+            self = .ten
         }
     }
 }

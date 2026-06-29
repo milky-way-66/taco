@@ -1,11 +1,12 @@
 import Foundation
 
 struct NeighborMoveComment: Equatable {
-    let english: String
-    let vietnamese: String
+    let englishFormat: String
+    let vietnameseFormat: String
 
-    func text(for language: AppLanguage) -> String {
-        language.effectiveLanguageCode == "vi" ? vietnamese : english
+    func text(for language: AppLanguage, address: NeighborPlayerAddress) -> String {
+        let format = language.effectiveLanguageCode == "vi" ? vietnameseFormat : englishFormat
+        return String(format: format, address.term(for: language))
     }
 }
 
@@ -18,12 +19,13 @@ enum NeighborMoveComments {
     ) -> String? {
         guard assessment.shouldComment else { return nil }
 
+        let address = NeighborPlayerAddress.forAssessment(assessment)
         let pool: [NeighborMoveComment]
         switch assessment.reason {
         case .missedImmediateWin:
             pool = missedWin
-        case .allowedOpponentWin:
-            pool = allowedOpponentWin
+        case .oneMoveFromLoss:
+            pool = oneMoveFromLoss
         case .strongMove:
             pool = assessment.quality == .excellent ? excellentMove : goodMove
         case .weakMove:
@@ -31,7 +33,7 @@ enum NeighborMoveComments {
         }
 
         let index = selectionIndex(move: move, moveNumber: moveNumber, poolSize: pool.count)
-        return pool[index].text(for: language)
+        return pool[index].text(for: language, address: address)
     }
 
     private static func selectionIndex(move: Cell, moveNumber: Int, poolSize: Int) -> Int {
@@ -41,77 +43,81 @@ enum NeighborMoveComments {
 
     private static let missedWin: [NeighborMoveComment] = [
         NeighborMoveComment(
-            english: "The win was right there. Are you blind?",
-            vietnamese: "Thắng ngon ăn mà còn không lấy — mù à?"
+            englishFormat: "The win was right there, %@. Are you blind?",
+            vietnameseFormat: "Thắng ngon ăn mà %@ còn không lấy — mù à?"
         ),
         NeighborMoveComment(
-            english: "You had one job. Take the win.",
-            vietnamese: "Một việc duy nhất: ăn thắng. Mày làm không nổi."
+            englishFormat: "%@ had one job. Take the win.",
+            vietnameseFormat: "Một việc duy nhất: ăn thắng. %@ làm không nổi."
         ),
         NeighborMoveComment(
-            english: "Know yourself? Clearly not.",
-            vietnamese: "Biết người biết ta — mày biết gì?"
+            englishFormat: "Know yourself, %@? Clearly not.",
+            vietnameseFormat: "Biết người biết ta — %@ biết gì?"
         ),
         NeighborMoveComment(
-            english: "One look and I know you're done.",
-            vietnamese: "Nhìn cái nước này là bố biết mày hết thuốc chữa rồi."
+            englishFormat: "One look and I know %@'s done.",
+            vietnameseFormat: "Nhìn cái nước này là bố biết %@ hết thuốc chữa rồi."
         ),
     ]
 
-    private static let allowedOpponentWin: [NeighborMoveComment] = [
+    private static let oneMoveFromLoss: [NeighborMoveComment] = [
         NeighborMoveComment(
-            english: "You just handed me the game.",
-            vietnamese: "Mày tự đưa bàn thắng cho bố rồi."
+            englishFormat: "No way to win now, %@. One more move.",
+            vietnameseFormat: "Không còn đường thoát %@ — một nước nữa là xong."
         ),
         NeighborMoveComment(
-            english: "Are you throwing the game on purpose?",
-            vietnamese: "Bố nghi mày cố tình thua để bố đỡ phải nói nhiều."
+            englishFormat: "%@ just handed me the game.",
+            vietnameseFormat: "%@ tự đưa bàn thắng cho bố rồi."
         ),
         NeighborMoveComment(
-            english: "Play with fire, get burned.",
-            vietnamese: "Chơi dao có ngày đứt tay — mày cầm dao mà tự chém mình."
+            englishFormat: "Game over, %@. You just don't know it yet.",
+            vietnameseFormat: "Xong rồi %@ — thua rồi, chỉ chưa biết thôi."
         ),
         NeighborMoveComment(
-            english: "That move smelled funny. Like you.",
-            vietnamese: "Nước này đúng là tự đào mồ chôn thân."
+            englishFormat: "%@ throwing the game on purpose?",
+            vietnameseFormat: "Bố nghi %@ cố tình thua để bố đỡ phải nói nhiều."
+        ),
+        NeighborMoveComment(
+            englishFormat: "That move smelled funny. Like %@.",
+            vietnameseFormat: "Nước này %@ tự đào mồ chôn thân."
         ),
     ]
 
     private static let excellentMove: [NeighborMoveComment] = [
         NeighborMoveComment(
-            english: "Better than I expected.",
-            vietnamese: "Khá đấy — tưởng mày dốt đặc cán mai."
+            englishFormat: "Better than I expected, %@.",
+            vietnameseFormat: "Khá đấy %@ — tưởng dốt đặc cán mai."
         ),
         NeighborMoveComment(
-            english: "Hmph. Not completely hopeless.",
-            vietnamese: "Hừm. Chưa đến nỗi phế vật."
+            englishFormat: "Hmph. %@'s not completely hopeless.",
+            vietnameseFormat: "Hừm. %@ chưa đến nỗi phế vật."
         ),
         NeighborMoveComment(
-            english: "You almost look like you thought.",
-            vietnamese: "Nhìn cũng ra có sỏi trong đầu."
+            englishFormat: "%@ almost looks like you thought.",
+            vietnameseFormat: "%@ nhìn cũng ra có sỏi trong đầu."
         ),
         NeighborMoveComment(
-            english: "Near ink, still not black. Impressive.",
-            vietnamese: "Gần mực thì đen — mày gần bố mà cũng ra phát này."
+            englishFormat: "Near ink, still not black. Not bad, %@.",
+            vietnameseFormat: "Gần mực thì đen — %@ gần bố mà cũng ra phát này."
         ),
     ]
 
     private static let goodMove: [NeighborMoveComment] = [
         NeighborMoveComment(
-            english: "Fine. I'll allow it.",
-            vietnamese: "Tạm. Bố cho qua lần này."
+            englishFormat: "Fine, %@. I'll allow it.",
+            vietnameseFormat: "Tạm %@, bố cho qua lần này."
         ),
         NeighborMoveComment(
-            english: "Don't get cocky. One move.",
-            vietnamese: "Đừng lên mặt. Mới được có một nước cờ."
+            englishFormat: "Don't get cocky, %@. One move.",
+            vietnameseFormat: "Đừng lên mặt %@. Mới được có một nước cờ."
         ),
         NeighborMoveComment(
-            english: "Slow and steady — you almost got it.",
-            vietnamese: "Chậm mà chắc — lần này tạm được."
+            englishFormat: "Slow and steady — %@ almost got it.",
+            vietnameseFormat: "Chậm mà chắc %@ — lần này tạm được."
         ),
         NeighborMoveComment(
-            english: "Even a blind chicken finds grain sometimes.",
-            vietnamese: "Gà mù đụng trúng — đừng tưởng bở."
+            englishFormat: "Even a blind chicken finds grain sometimes, %@.",
+            vietnameseFormat: "Gà mù đụng trúng — %@ đừng tưởng bở."
         ),
     ]
 }

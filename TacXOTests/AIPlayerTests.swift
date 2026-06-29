@@ -55,13 +55,6 @@ final class AIPlayerTests: XCTestCase {
         XCTAssertLessThan(elapsed, .milliseconds(200))
     }
 
-    func testFirstMoveOn25x25StaysNearCenter() {
-        let engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .vsNeighbor))
-        let move = AIPlayer.bestMove(for: engine, hardness: 100)
-        XCTAssertTrue((10...14).contains(move.x))
-        XCTAssertTrue((10...14).contains(move.y))
-    }
-
     func testBlocksOpponentWinOn10x10() {
         let engine = GameEngine(
             settings: GameSettings(winLength: 5, boardSize: .ten, mode: .vsNeighbor),
@@ -79,7 +72,7 @@ final class AIPlayerTests: XCTestCase {
     }
 
     func testLargeBoardMoveCompletesQuickly() {
-        let engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .vsNeighbor))
+        let engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .ten, mode: .vsNeighbor))
         let start = ContinuousClock.now
         _ = AIPlayer.bestMove(for: engine, hardness: 100)
         let elapsed = start.duration(to: .now)

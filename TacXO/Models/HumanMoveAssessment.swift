@@ -2,7 +2,7 @@ import Foundation
 
 enum HumanMoveReason: Equatable {
     case missedImmediateWin
-    case allowedOpponentWin
+    case oneMoveFromLoss
     case strongMove(rank: Int, total: Int)
     case weakMove(rank: Int, total: Int)
 }
@@ -13,7 +13,7 @@ struct HumanMoveAssessment: Equatable {
 
     var shouldComment: Bool {
         switch reason {
-        case .missedImmediateWin, .allowedOpponentWin:
+        case .missedImmediateWin, .oneMoveFromLoss:
             return true
         case .strongMove:
             return quality == .excellent || quality == .good

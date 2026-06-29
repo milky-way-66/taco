@@ -60,14 +60,14 @@ final class GameEngineTests: XCTestCase {
         XCTAssertEqual(engine.currentPlayer, .x)
     }
 
-    func testRejectsOutOfBoundsOn25x25() {
-        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .twoPlayer))
-        XCTAssertThrowsError(try engine.place(at: Cell(x: 25, y: 0)))
+    func testRejectsOutOfBoundsOn10x10() {
+        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .ten, mode: .twoPlayer))
+        XCTAssertThrowsError(try engine.place(at: Cell(x: 10, y: 0)))
     }
 
-    func testTwentyFiveBoardAcceptsValidCell() throws {
-        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .twentyFive, mode: .twoPlayer))
-        let result = try engine.place(at: Cell(x: 12, y: 12))
+    func testTenBoardAcceptsValidCell() throws {
+        var engine = GameEngine(settings: GameSettings(winLength: 5, boardSize: .ten, mode: .twoPlayer))
+        let result = try engine.place(at: Cell(x: 5, y: 5))
         XCTAssertEqual(result, .ongoing)
     }
 }

@@ -33,7 +33,7 @@ final class MoveCommentTests: XCTestCase {
         XCTAssertEqual(assessment.quality, .excellent)
     }
 
-    func testDetectsAllowedOpponentWin() {
+    func testDetectsOneMoveFromLoss() {
         let engine = GameEngine(
             settings: GameSettings(winLength: 3, boardSize: .three, mode: .vsNeighbor),
             cells: [
@@ -47,7 +47,63 @@ final class MoveCommentTests: XCTestCase {
 
         let assessment = AIPlayer.assessHumanMove(Cell(x: 1, y: 1), before: engine, hardness: 100)
         XCTAssertEqual(assessment.quality, .blunder)
-        XCTAssertEqual(assessment.reason, .allowedOpponentWin)
+        XCTAssertEqual(assessment.reason, .oneMoveFromLoss)
+        XCTAssertTrue(assessment.shouldComment)
+    }
+
+    func testOneMoveFromLossAlwaysComments() {
+        let assessment = HumanMoveAssessment(quality: .blunder, reason: .oneMoveFromLoss)
+        let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: Cell(x: 1, y: 1),
+            moveNumber: 4,
+            language: .english
+        )
+        XCTAssertNotNil(text)
+    }
+
+    func testOneMoveFromLossCommentIsSpecific() {
+        let assessment = HumanMoveAssessment(quality: .blunder, reason: .oneMoveFromLoss)
+        let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: Cell(x: 1, y: 1),
+            moveNumber: 4,
+            language: .english
+        )
+        XCTAssertEqual(text, "That move smelled funny. Like this guy.")
+    }
+
+    func testAngryAddressInVietnamese() {
+        let assessment = HumanMoveAssessment(quality: .blunder, reason: .oneMoveFromLoss)
+        let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: Cell(x: 1, y: 1),
+            moveNumber: 4,
+            language: .vietnamese
+        )
+        XCTAssertTrue(text?.contains("thằng này") == true)
+    }
+
+    func testHappyAddressInVietnamese() {
+        let assessment = HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 4))
+        let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: Cell(x: 0, y: 0),
+            moveNumber: 1,
+            language: .vietnamese
+        )
+        XCTAssertTrue(text?.contains("nhóc") == true)
+    }
+
+    func testNormalAddressInVietnamese() {
+        let assessment = HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 1, total: 4))
+        let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: Cell(x: 0, y: 0),
+            moveNumber: 1,
+            language: .vietnamese
+        )
+        XCTAssertTrue(text?.contains("mày") == true)
     }
 
     func testMissedWinCommentUsesMissedWinPool() {
@@ -66,22 +122,6 @@ final class MoveCommentTests: XCTestCase {
             language: .english
         )
         XCTAssertNotEqual(text, excellent)
-    }
-
-    func testAllowedWinCommentIsSpecific() {
-        let assessment = HumanMoveAssessment(quality: .blunder, reason: .allowedOpponentWin)
-        let text = NeighborMoveComments.comment(
-            for: assessment,
-            move: Cell(x: 1, y: 1),
-            moveNumber: 4,
-            language: .english
-        )
-        XCTAssertNotNil(text)
-        XCTAssertTrue(
-            text?.lowercased().contains("handed") == true
-                || text?.lowercased().contains("throwing") == true
-                || text?.lowercased().contains("fire") == true
-        )
     }
 
     func testMediocreMoveDoesNotComment() {

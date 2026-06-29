@@ -58,7 +58,7 @@ enum AIPlayer {
             return HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 1))
         }
 
-        if let winCell = immediateWinningMove(for: engine), winCell != move {
+        if let winCell = immediateWinningMoveSearchingFullBoard(for: engine), winCell != move {
             return HumanMoveAssessment(quality: .blunder, reason: .missedImmediateWin)
         }
 
@@ -71,8 +71,8 @@ enum AIPlayer {
                 currentPlayer: .o,
                 result: afterHuman.result
             )
-            if immediateWinningMove(for: opponentTurn) != nil {
-                return HumanMoveAssessment(quality: .blunder, reason: .allowedOpponentWin)
+            if immediateWinningMoveSearchingFullBoard(for: opponentTurn) != nil {
+                return HumanMoveAssessment(quality: .blunder, reason: .oneMoveFromLoss)
             }
         }
 
@@ -368,6 +368,17 @@ enum AIPlayer {
     private static func immediateWinningMove(for engine: GameEngine) -> Cell? {
         let moves = candidateCells(for: engine)
         for move in moves {
+            var copy = engine
+            if let result = try? copy.place(at: move), case .won(let mark) = result, mark == engine.currentPlayer {
+                return move
+            }
+        }
+        return nil
+    }
+
+    private static func immediateWinningMoveSearchingFullBoard(for engine: GameEngine) -> Cell? {
+        let dimension = engine.settings.boardSize.dimension
+        for move in allCellsInBounds(dimension: dimension) where engine.canPlay(at: move) {
             var copy = engine
             if let result = try? copy.place(at: move), case .won(let mark) = result, mark == engine.currentPlayer {
                 return move
