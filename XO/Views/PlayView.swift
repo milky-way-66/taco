@@ -6,8 +6,7 @@ struct PlayView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.98, green: 0.96, blue: 0.9)
-                .ignoresSafeArea()
+            PaperBackgroundView()
 
             VStack(spacing: 16) {
                 HStack {
@@ -32,7 +31,7 @@ struct PlayView: View {
                         .font(.system(.title3, design: .serif))
                 }
 
-                Button("New Game") {
+                Button(String(localized: "new_game")) {
                     controller.newGame()
                 }
                 .font(.system(.body, design: .serif))
@@ -40,7 +39,7 @@ struct PlayView: View {
             }
 
             if controller.showLossOverlay, let quote = controller.lossQuote {
-                LossOverlayView(quote: quote)
+                LossOverlayView(quote: quote, language: controller.settings.language)
             }
         }
         .sheet(isPresented: $showSettings) {
@@ -51,19 +50,25 @@ struct PlayView: View {
     private var turnLabel: String {
         switch controller.engine.result {
         case .ongoing:
-            return "\(controller.engine.currentPlayer.label)'s turn"
+            return String(
+                format: String(localized: "turn_of_player"),
+                controller.engine.currentPlayer.label
+            )
         case .won(let mark):
-            return "\(mark.label) wins!"
+            return String(format: String(localized: "player_wins"), mark.label)
         case .draw:
-            return "Draw"
+            return String(localized: "draw")
         }
     }
 
     private var gameOverLabel: String {
         switch controller.engine.result {
-        case .won(let mark): return "\(mark.label) wins!"
-        case .draw: return "Draw — even garbage ties sometimes."
-        case .ongoing: return ""
+        case .won(let mark):
+            return String(format: String(localized: "player_wins"), mark.label)
+        case .draw:
+            return String(localized: "draw_flavor")
+        case .ongoing:
+            return ""
         }
     }
 }

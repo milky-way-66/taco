@@ -6,7 +6,7 @@ final class GameController {
     var settings: GameSettings
     private(set) var engine: GameEngine
     private(set) var difficulty = AdaptiveDifficulty()
-    var lossQuote: String?
+    var lossQuote: NeighborQuote?
     var showLossOverlay = false
 
     /// Human is always X; Neighbor is O in vs Neighbor mode
@@ -65,10 +65,10 @@ final class GameController {
                 SoundManager.shared.playWin()
             } else {
                 difficulty.recordLoss()
-                lossQuote = NeighborQuotes.random()
+                lossQuote = NeighborQuotes.random(language: settings.language)
                 showLossOverlay = true
                 SoundManager.shared.playNeighborLoss()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { [weak self] in
                     self?.showLossOverlay = false
                 }
             }

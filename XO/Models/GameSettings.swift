@@ -20,16 +20,37 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
 }
 
 enum GameMode: String, Codable, CaseIterable, Identifiable {
-    case twoPlayer = "2 Players"
-    case vsNeighbor = "vs Neighbor"
+    case twoPlayer
+    case vsNeighbor
 
     var id: String { rawValue }
+
+    var labelKey: String {
+        switch self {
+        case .twoPlayer: return "mode_two_player"
+        case .vsNeighbor: return "mode_vs_neighbor"
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        switch value {
+        case "twoPlayer", "2 Players":
+            self = .twoPlayer
+        case "vsNeighbor", "vs Neighbor":
+            self = .vsNeighbor
+        default:
+            self = .vsNeighbor
+        }
+    }
 }
 
 struct GameSettings: Codable, Equatable {
     var winLength: Int = 5
     var boardSize: BoardSize = .five
     var mode: GameMode = .vsNeighbor
+    var language: AppLanguage = .system
 
     static let `default` = GameSettings()
 

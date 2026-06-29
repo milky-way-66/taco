@@ -13,37 +13,49 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Win Length") {
+                Section(String(localized: "language_section")) {
+                    Picker(String(localized: "language_section"), selection: $draft.language) {
+                        ForEach(AppLanguage.allCases) { language in
+                            Text(String(localized: String.LocalizationValue(language.settingsLabelKey)))
+                                .tag(language)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                Section(String(localized: "win_length_section")) {
                     Stepper(value: $draft.winLength, in: 3...7) {
-                        Text("\(draft.winLength) in a row")
+                        Text(String(format: String(localized: "win_length_format"), draft.winLength))
                     }
                 }
-                Section("Board Size") {
-                    Picker("Board", selection: $draft.boardSize) {
+                Section(String(localized: "board_size_section")) {
+                    Picker(String(localized: "board_picker_label"), selection: $draft.boardSize) {
                         ForEach(BoardSize.allCases) { size in
                             Text(size.rawValue).tag(size)
                         }
                     }
                     .pickerStyle(.segmented)
                 }
-                Section("Mode") {
-                    Picker("Mode", selection: $draft.mode) {
+                Section(String(localized: "mode_section")) {
+                    Picker(String(localized: "mode_picker_label"), selection: $draft.mode) {
                         ForEach(GameMode.allCases) { mode in
-                            Text(mode.rawValue).tag(mode)
+                            Text(String(localized: String.LocalizationValue(mode.labelKey)))
+                                .tag(mode)
                         }
                     }
                     .pickerStyle(.segmented)
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(String(localized: "settings_title"))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                    Button(String(localized: "done")) {
                         controller.applySettings(draft)
                         dismiss()
                     }
                 }
             }
         }
+        .environment(\.locale, draft.language.locale)
     }
 }

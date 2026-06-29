@@ -16,13 +16,22 @@ A minimal iOS tic-tac-toe game with configurable rules, paper-classic visuals, a
 - Local only: 2-player pass-and-play or vs computer
 - As small and simple as possible
 
+## Platform Requirements
+
+- **Minimum deployment target:** iOS **17.0**
+- **Supported versions:** iOS 17 and all later releases (iOS 18, etc.)
+- **Not supported:** iOS 16 and below
+- **Devices (v1):** iPhone, portrait orientation
+
+The app may use iOS 17+ APIs directly (`@Observable`, modern SwiftUI) without backward-compatibility shims for older OS versions.
+
 ## Stack
 
 | Layer | Choice |
 |-------|--------|
 | UI | SwiftUI |
-| Language | Swift |
-| Min iOS | 17+ |
+| Language | Swift 5.9+ |
+| Minimum iOS | **17.0** |
 | Persistence | UserDefaults |
 | Audio | AVFoundation (short SFX clips) |
 | Haptics | UIKit feedback generators |
@@ -250,7 +259,7 @@ Unit tests for engine/AI only. No UI tests in v1.
 
 ### In
 
-- iPhone portrait, iOS 17+
+- iPhone portrait; **iOS 17.0+** (deployment target iOS 17.0)
 - 2-player pass-and-play
 - vs Neighbor with adaptive AI
 - Board sizes: 3×3, 5×5, 10×10, infinite (pan)
@@ -274,4 +283,3 @@ Unit tests for engine/AI only. No UI tests in v1.
 2. Change rules in Settings → instantly understood
 3. 3×3 game completable in under a minute
 4. Neighbor feels mean but fun after a loss
-5. App size < 5 MB
