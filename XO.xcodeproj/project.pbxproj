@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */; };
 		546EBB507065C480B7BF0E89 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D415FD94C7117BD37D9550 /* Mark.swift */; };
 		79A7FC042FF2040C0496E632 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B33E51A275E5A808EBB9E /* GameSettings.swift */; };
 		8540275BC6FFE9D6CF4F99A1 /* XOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFB9FC4EC58590329F9F07D /* XOTests.swift */; };
 		8BC27882F2A819217D167114 /* XOApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E38A4D1701E0FB2F067AB /* XOApp.swift */; };
+		9E317C01D6995400D1AD0977 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76B40659468440F8E88D1D9 /* GameEngineTests.swift */; };
 		A068E16F56AD66DC7E10AEB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C72F1AF0C5167BCFD382DB7D /* Assets.xcassets */; };
 		C741DDBD93C43AA86634BF9C /* WinChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B707A365702F0C0AA4AABE /* WinChecker.swift */; };
 		DD88585EBD868D7D93B7D896 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8DB6656A86FB5A4452A88 /* Cell.swift */; };
@@ -33,7 +35,9 @@
 		483AB6EAD73515789D7648BF /* XO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623B33E51A275E5A808EBB9E /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		68DBBDF76611B37202BB4F57 /* XOTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		85D415FD94C7117BD37D9550 /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		A76B40659468440F8E88D1D9 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		BDFB9FC4EC58590329F9F07D /* XOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XOTests.swift; sourceTree = "<group>"; };
 		C72F1AF0C5167BCFD382DB7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9F8DB6656A86FB5A4452A88 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		92433509D9D67230F7573EFC /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				7E1A1CBE43810DC34FC4B673 /* GameEngine.swift */,
 				F5B707A365702F0C0AA4AABE /* WinChecker.swift */,
 			);
 			path = Engine;
@@ -80,6 +85,7 @@
 		B38A2047B56E5DC5F8F749C3 /* XOTests */ = {
 			isa = PBXGroup;
 			children = (
+				A76B40659468440F8E88D1D9 /* GameEngineTests.swift */,
 				43C3B1C39D49EFF422FB3368 /* WinCheckerTests.swift */,
 				BDFB9FC4EC58590329F9F07D /* XOTests.swift */,
 			);
@@ -192,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD88585EBD868D7D93B7D896 /* Cell.swift in Sources */,
+				1FB3C44CDF850871F4C3DC7B /* GameEngine.swift in Sources */,
 				79A7FC042FF2040C0496E632 /* GameSettings.swift in Sources */,
 				546EBB507065C480B7BF0E89 /* Mark.swift in Sources */,
 				C741DDBD93C43AA86634BF9C /* WinChecker.swift in Sources */,
@@ -203,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E317C01D6995400D1AD0977 /* GameEngineTests.swift in Sources */,
 				EA8A7C134EAD275BB9A5B7C5 /* WinCheckerTests.swift in Sources */,
 				8540275BC6FFE9D6CF4F99A1 /* XOTests.swift in Sources */,
 			);
