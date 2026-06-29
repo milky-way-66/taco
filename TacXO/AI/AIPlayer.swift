@@ -1,7 +1,15 @@
 import Foundation
 
+enum HumanMoveQuality: Equatable {
+    case excellent
+    case good
+    case mediocre
+    case poor
+    case blunder
+}
+
 enum AIPlayer {
-    static func bestMove(for engine: GameEngine, difficulty: Int) -> Cell {
+    static func bestMove(for engine: GameEngine, hardness: Int) -> Cell {
         let candidates = candidateCells(for: engine)
         guard !candidates.isEmpty else {
             return Cell(x: 0, y: 0)
@@ -17,27 +25,106 @@ enum AIPlayer {
             currentPlayer: engine.currentPlayer.opponent,
             result: engine.result
         )
-        if difficulty >= 2, let block = immediateWinningMove(for: opponentEngine) {
+        if aiLevel(from: hardness) >= 1, let block = immediateWinningMove(for: opponentEngine) {
             return block
         }
 
-        let depth = searchDepth(for: engine, difficulty: difficulty)
+        let depth = searchDepth(for: engine, hardness: hardness)
         let ranked: [(Cell, Int)]
-        if depth > 0 {
+        if depth > 0, usesMinimaxSearch(for: engine) {
             ranked = rankWithMinimax(candidates, engine: engine, depth: depth)
         } else {
             ranked = rankMoves(candidates, engine: engine)
         }
 
-        return selectMove(from: ranked, difficulty: difficulty)
+        return selectMove(from: ranked, hardness: hardness)
+    }
+
+    private static func usesMinimaxSearch(for engine: GameEngine) -> Bool {
+        engine.settings.boardSize.dimension <= 10
+    }
+
+    static func evaluateHumanMove(_ move: Cell, before engine: GameEngine, hardness: Int) -> HumanMoveQuality {
+        assessHumanMove(move, before: engine, hardness: hardness).quality
+    }
+
+    static func assessHumanMove(_ move: Cell, before engine: GameEngine, hardness: Int) -> HumanMoveAssessment {
+        guard engine.currentPlayer == .x, engine.canPlay(at: move) else {
+            return HumanMoveAssessment(quality: .blunder, reason: .weakMove(rank: 0, total: 1))
+        }
+
+        var afterMove = engine
+        if let result = try? afterMove.place(at: move), case .won(.x) = result {
+            return HumanMoveAssessment(quality: .excellent, reason: .strongMove(rank: 0, total: 1))
+        }
+
+        if let winCell = immediateWinningMove(for: engine), winCell != move {
+            return HumanMoveAssessment(quality: .blunder, reason: .missedImmediateWin)
+        }
+
+        var afterHuman = engine
+        _ = try? afterHuman.place(at: move)
+        if afterHuman.result == .ongoing {
+            let opponentTurn = GameEngine(
+                settings: afterHuman.settings,
+                cells: afterHuman.cells,
+                currentPlayer: .o,
+                result: afterHuman.result
+            )
+            if immediateWinningMove(for: opponentTurn) != nil {
+                return HumanMoveAssessment(quality: .blunder, reason: .allowedOpponentWin)
+            }
+        }
+
+        let candidates = candidateCells(for: engine)
+        guard candidates.count > 1 else {
+            return HumanMoveAssessment(quality: .good, reason: .strongMove(rank: 0, total: 1))
+        }
+
+        let ranked = rankMoves(candidates, engine: engine)
+
+        guard let index = ranked.firstIndex(where: { $0.0 == move }) else {
+            return HumanMoveAssessment(
+                quality: .mediocre,
+                reason: .weakMove(rank: ranked.count / 2, total: ranked.count)
+            )
+        }
+
+        let total = ranked.count
+        let percentile = Double(index) / Double(max(total - 1, 1))
+        let quality: HumanMoveQuality
+        switch percentile {
+        case ...0.15: quality = .excellent
+        case ...0.35: quality = .good
+        case ...0.65: quality = .mediocre
+        default: quality = .poor
+        }
+
+        let reason: HumanMoveReason
+        switch quality {
+        case .excellent, .good:
+            reason = .strongMove(rank: index, total: total)
+        case .mediocre, .poor, .blunder:
+            reason = .weakMove(rank: index, total: total)
+        }
+
+        return HumanMoveAssessment(quality: quality, reason: reason)
     }
 
     private static func candidateCells(for engine: GameEngine) -> [Cell] {
         let dim = engine.settings.boardSize.dimension
-        if dim > 10 {
+        if dim > 3 {
             return neighborhoodCandidates(engine: engine, dimension: dim)
         }
         return allCellsInBounds(dimension: dim).filter { engine.canPlay(at: $0) }
+    }
+
+    private static func neighborhoodRadius(for dimension: Int) -> Int {
+        switch dimension {
+        case ...5: return 1
+        case ...10: return 2
+        default: return 2
+        }
     }
 
     private static func allCellsInBounds(dimension: Int) -> [Cell] {
@@ -47,17 +134,18 @@ enum AIPlayer {
     }
 
     private static func neighborhoodCandidates(engine: GameEngine, dimension: Int) -> [Cell] {
+        let radius = neighborhoodRadius(for: dimension)
         guard !engine.cells.isEmpty else {
             let center = dimension / 2
-            return (-2...2).flatMap { dy in
-                (-2...2).map { dx in Cell(x: center + dx, y: center + dy) }
+            return (-radius...radius).flatMap { dy in
+                (-radius...radius).map { dx in Cell(x: center + dx, y: center + dy) }
             }.filter { engine.canPlay(at: $0) }
         }
 
         var set = Set<Cell>()
         for (cell, _) in engine.cells {
-            for dx in -2...2 {
-                for dy in -2...2 {
+            for dx in -radius...radius {
+                for dy in -radius...radius {
                     let candidate = Cell(x: cell.x + dx, y: cell.y + dy)
                     if engine.canPlay(at: candidate) {
                         set.insert(candidate)
@@ -68,38 +156,52 @@ enum AIPlayer {
         return Array(set)
     }
 
-    private static func searchDepth(for engine: GameEngine, difficulty: Int) -> Int {
+    private static func aiLevel(from hardness: Int) -> Int {
+        min(5, max(0, hardness * 5 / 100))
+    }
+
+    private static func extraSearchDepth(from hardness: Int) -> Int {
+        min(1, max(0, (min(AdaptiveDifficulty.maxHardness, hardness) - 100) / 50))
+    }
+
+    private static func searchDepth(for engine: GameEngine, hardness: Int) -> Int {
         let dim = engine.settings.boardSize.dimension
         let emptyCells = dim * dim - engine.cells.count
+        let level = aiLevel(from: hardness)
+        let bonus = extraSearchDepth(from: hardness)
 
         let baseDepth: Int
         switch dim {
         case ...3:
             baseDepth = emptyCells
         case ...5:
-            baseDepth = min(6, emptyCells)
+            baseDepth = min(3, emptyCells)
         case ...10:
-            baseDepth = min(4, emptyCells)
+            baseDepth = min(3, emptyCells)
         default:
-            return 0
+            baseDepth = min(2, emptyCells)
         }
 
-        switch difficulty {
-        case 5: return baseDepth
-        case 4: return max(1, baseDepth - 1)
-        case 3: return max(1, baseDepth - 2)
-        case 2: return max(1, min(2, baseDepth - 3))
-        default: return 0
+        let depth: Int
+        switch level {
+        case 5: depth = baseDepth
+        case 4: depth = max(usesMinimaxSearch(for: engine) ? 1 : 0, baseDepth - 1)
+        case 3: depth = max(usesMinimaxSearch(for: engine) ? 1 : 0, baseDepth - 2)
+        case 2: depth = usesMinimaxSearch(for: engine) ? max(1, min(2, baseDepth - 3)) : 0
+        default: depth = 0
         }
+
+        return min(depth + bonus, emptyCells)
     }
 
     private static func rankWithMinimax(_ moves: [Cell], engine: GameEngine, depth: Int) -> [(Cell, Int)] {
-        let ordered = moves.sorted {
-            heuristic(move: $0, engine: engine) > heuristic(move: $1, engine: engine)
-        }
+        let limit = maxRootMoves(for: engine)
+        let ordered = moves
+            .sorted { heuristic(move: $0, engine: engine) > heuristic(move: $1, engine: engine) }
+        let rootMoves = Array(ordered.prefix(limit))
         let aiMark = engine.currentPlayer
 
-        return ordered.map { move in
+        return rootMoves.map { move in
             var copy = engine
             _ = try? copy.place(at: move)
             let score = minimax(
@@ -137,7 +239,7 @@ enum AIPlayer {
             return evaluatePosition(engine: engine, aiMark: aiMark)
         }
 
-        let candidates = orderedCandidates(for: engine)
+        let candidates = searchCandidates(for: engine)
         let isMaximizing = engine.currentPlayer == aiMark
 
         if isMaximizing {
@@ -179,10 +281,41 @@ enum AIPlayer {
         return best
     }
 
-    private static func orderedCandidates(for engine: GameEngine) -> [Cell] {
-        candidateCells(for: engine).sorted {
-            heuristic(move: $0, engine: engine) > heuristic(move: $1, engine: engine)
+    private static func maxRootMoves(for engine: GameEngine) -> Int {
+        switch engine.settings.boardSize.dimension {
+        case ...3: return 9
+        case ...5: return 8
+        case ...10: return 8
+        default: return 10
         }
+    }
+
+    private static func searchCandidates(for engine: GameEngine) -> [Cell] {
+        let cells = candidateCells(for: engine)
+        let limit = maxRootMoves(for: engine)
+        guard cells.count > limit else { return cells }
+        return Array(
+            cells.sorted { proximityScore($0, engine: engine) > proximityScore($1, engine: engine) }
+                .prefix(limit)
+        )
+    }
+
+    private static func proximityScore(_ move: Cell, engine: GameEngine) -> Int {
+        var score = 0
+        for (cell, _) in engine.cells {
+            let distance = abs(move.x - cell.x) + abs(move.y - cell.y)
+            switch distance {
+            case 1: score += 60
+            case 2: score += 28
+            case 3: score += 10
+            default: break
+            }
+        }
+
+        let dimension = engine.settings.boardSize.dimension
+        let center = (dimension - 1) / 2
+        score += max(0, 14 - (abs(move.x - center) + abs(move.y - center)))
+        return score
     }
 
     private static func evaluatePosition(engine: GameEngine, aiMark: Mark) -> Int {
@@ -378,11 +511,12 @@ enum AIPlayer {
         }
     }
 
-    private static func selectMove(from ranked: [(Cell, Int)], difficulty: Int) -> Cell {
+    private static func selectMove(from ranked: [(Cell, Int)], hardness: Int) -> Cell {
         guard let best = ranked.first?.0 else { return Cell(x: 0, y: 0) }
         let top = ranked.prefix(3).map(\.0)
+        let level = aiLevel(from: hardness)
 
-        switch difficulty {
+        switch level {
         case 5, 4:
             return best
         case 3:

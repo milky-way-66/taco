@@ -15,25 +15,47 @@ struct PlayView: View {
             VStack(spacing: 0) {
                 topBar
 
-                BoardView(
-                    engine: controller.engine,
-                    isInteractive: controller.engine.result == .ongoing
-                        && !isResettingBoard
-                        && !controller.isAIThinking
-                ) { cell in
-                    controller.tap(cell: cell)
+                ZStack(alignment: .top) {
+                    BoardView(
+                        engine: controller.engine,
+                        isInteractive: controller.engine.result == .ongoing
+                            && !isResettingBoard
+                            && !controller.isAIThinking
+                    ) { cell in
+                        controller.tap(cell: cell)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .scaleEffect(boardScale)
+                    .opacity(boardOpacity)
+                    .blur(radius: boardOpacity < 0.98 ? (1 - boardOpacity) * 3 : 0)
+                    .id(controller.gameID)
+
+                    if controller.settings.mode == .vsNeighbor,
+                       let comment = controller.neighborComment {
+                        NeighborSpeechBubbleView(
+                            name: Neighbor.name(for: controller.settings.language),
+                            text: comment.text,
+                            mood: comment.mood
+                        )
+                        .id(comment)
+                        .padding(.horizontal, 16)
+                        .padding(.top, 10)
+                        .transition(
+                            .asymmetric(
+                                insertion: .identity,
+                                removal: .opacity.combined(with: .offset(y: -28))
+                            )
+                        )
+                        .zIndex(2)
+                    }
                 }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .scaleEffect(boardScale)
-                .opacity(boardOpacity)
-                .blur(radius: boardOpacity < 0.98 ? (1 - boardOpacity) * 3 : 0)
-                .id(controller.gameID)
             }
 
             if controller.isWinCelebrating {
-                WinCelebrationView()
+                WinCelebrationView(winStreak: controller.difficulty.winStreak)
                     .transition(.opacity)
                     .zIndex(0.5)
             }
@@ -43,12 +65,16 @@ struct PlayView: View {
                     quote: overlay.quote,
                     kind: overlay.kind,
                     language: controller.settings.language,
-                    onDismiss: { controller.dismissQuoteOverlay() }
+                    hardnessPercent: overlay.hardnessPercent,
+                    hardnessDelta: overlay.hardnessDelta,
+                    winStreak: overlay.winStreak,
+                    onDismiss: { startNewGame() }
                 )
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
                 .zIndex(1)
             }
         }
+        .animation(GameTheme.commentSpring, value: controller.neighborComment)
         .animation(GameTheme.overlaySpring, value: controller.quoteOverlay != nil)
         .sheet(isPresented: $showSettings) {
             SettingsView(controller: controller)
@@ -67,23 +93,19 @@ struct PlayView: View {
             .buttonStyle(.plain)
             .frame(width: 44, height: 44)
 
-            Group {
-                if controller.isAIThinking {
-                    ThinkingIndicatorView()
-                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
-                } else {
-                    Text(statusLabel)
-                        .contentTransition(.numericText())
-                }
+            Text(statusLabel)
+                .contentTransition(.numericText())
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.primary)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+                .animation(GameTheme.newGameSpring, value: statusLabel)
+
+            if controller.settings.mode == .vsNeighbor {
+                hardnessBadge
             }
-            .font(.subheadline.weight(.medium))
-            .foregroundStyle(.primary)
-            .frame(maxWidth: .infinity)
-            .multilineTextAlignment(.center)
-            .lineLimit(1)
-            .minimumScaleFactor(0.85)
-            .animation(GameTheme.newGameSpring, value: statusLabel)
-            .animation(GameTheme.thinkingPulse, value: controller.isAIThinking)
 
             Button {
                 startNewGame()
@@ -106,6 +128,13 @@ struct PlayView: View {
                 .fill(Color.primary.opacity(0.06))
                 .frame(height: 0.5)
         }
+    }
+
+    private var hardnessBadge: some View {
+        HardnessNavBadge(
+            percent: controller.difficulty.hardnessPercent,
+            winStreak: controller.difficulty.winStreak
+        )
     }
 
     private func startNewGame() {
@@ -141,11 +170,17 @@ struct PlayView: View {
     private var statusLabel: String {
         switch controller.engine.result {
         case .ongoing:
+            if controller.settings.mode == .vsNeighbor, controller.engine.currentPlayer == .o {
+                return String(localized: "neighbor_turn")
+            }
             return String(
                 format: String(localized: "turn_of_player"),
                 controller.engine.currentPlayer.label
             )
         case .won(let mark):
+            if controller.settings.mode == .vsNeighbor, mark == .o {
+                return String(localized: "neighbor_wins")
+            }
             return String(format: String(localized: "player_wins"), mark.label)
         case .draw:
             return String(localized: "draw_flavor")

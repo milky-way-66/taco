@@ -59,7 +59,7 @@ enum GameMode: String, Codable, CaseIterable, Identifiable {
 
 struct GameSettings: Codable, Equatable {
     var winLength: Int = 5
-    var boardSize: BoardSize = .five
+    var boardSize: BoardSize = .ten
     var mode: GameMode = .vsNeighbor
     var language: AppLanguage = .system
 

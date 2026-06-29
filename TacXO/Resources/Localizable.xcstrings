@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld%%" : {
+
+    },
+    "+%lld%%" : {
+
+    },
     "○" : {
 
     },
@@ -83,7 +89,72 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hòa — rác cũng hòa được đấy."
+            "value" : "Hòa — may cho mày đấy!"
+          }
+        }
+      }
+    },
+    "hardness_accessibility" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncle Sáu hardness %lld percent"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ông Sáu khó chịu %lld%%"
+          }
+        }
+      }
+    },
+    "hardness_end_game" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%% (%+lld%%)"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%% (%+lld%%)"
+          }
+        }
+      }
+    },
+    "hardness_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UNCLE SÁU'S HARDNESS"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ĐỘ KHÓ CỦA ÔNG SÁU"
+          }
+        }
+      }
+    },
+    "hardness_nav" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
           }
         }
       }
@@ -166,23 +237,24 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "THUA CUỘC"
+            "value" : "THUA THẢM!"
           }
         }
       }
     },
     "loss_neighbor_says" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "THE NEIGHBOR REMARKS"
+            "value" : "UNCLE SÁU REMARKS"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HÀNG XÓM NÓI"
+            "value" : "ÔNG SÁU PHÁN"
           }
         }
       }
@@ -198,39 +270,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CHẠM ĐỂ TIẾP TỤC"
-          }
-        }
-      }
-    },
-    "win_victory" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "VICTORY"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CHIẾN THẮNG"
-          }
-        }
-      }
-    },
-    "win_neighbor_mutters" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "THE NEIGHBOR MUTTERS"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HÀNG XÓM LẨM BẨM"
+            "value" : "LÀM NHÁY NỮA"
           }
         }
       }
@@ -279,7 +319,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "2 người"
+            "value" : "Hai người"
           }
         }
       }
@@ -290,29 +330,78 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "vs Neighbor"
+            "value" : "vs Uncle Sáu"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đấu ông hàng xóm"
+            "value" : "Đấu với ông Sáu"
+          }
+        }
+      }
+    },
+    "neighbor_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncle Sáu"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ông Sáu"
           }
         }
       }
     },
     "neighbor_thinking" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neighbor is thinking"
+            "value" : "%@ is thinking…"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ông hàng xóm đang suy nghĩ"
+            "value" : "%@ đang vò đầu bứt tóc…"
+          }
+        }
+      }
+    },
+    "neighbor_turn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncle Sáu's turn"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lượt ông Sáu"
+          }
+        }
+      }
+    },
+    "neighbor_wins" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncle Sáu wins"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ông Sáu thắng!"
           }
         }
       }
@@ -376,7 +465,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lượt %@"
+            "value" : "Lượt của %@"
           }
         }
       }
@@ -392,7 +481,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Liên tiếp %lld quân"
+            "value" : "Thắng %lld quân"
           }
         }
       }
@@ -408,7 +497,56 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Số quân thắng"
+            "value" : "Điều kiện thắng"
+          }
+        }
+      }
+    },
+    "win_neighbor_mutters" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UNCLE SÁU MUTTERS"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ÔNG SÁU LẨM BẨM"
+          }
+        }
+      }
+    },
+    "win_streak_format" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld win streak"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thắng %lld ván"
+          }
+        }
+      }
+    },
+    "win_victory" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VICTORY"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "THẮNG RỒI!"
           }
         }
       }

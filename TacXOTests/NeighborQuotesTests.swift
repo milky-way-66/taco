@@ -14,25 +14,24 @@ final class NeighborQuotesTests: XCTestCase {
 
     func testEnglishQuotesUseEnglishPool() {
         var quotes = Set<String>()
-        for _ in 0..<60 {
+        for _ in 0..<120 {
             quotes.insert(NeighborQuotes.random(language: .english).english)
         }
-        XCTAssertTrue(quotes.contains(where: { $0.contains("dog") || $0.contains("thinking") }))
+        let proverbMarkers = ["dog", "thinking", "lose", "heaven", "luck", "win"]
+        XCTAssertTrue(quotes.contains(where: { quote in
+            proverbMarkers.contains(where: { quote.localizedCaseInsensitiveContains($0) })
+        }))
     }
 
-    func testEachWinQuoteHasBilingualExplanations() {
+    func testEachWinQuoteHasBilingualText() {
         for quote in NeighborWinQuotes.all {
-            XCTAssertFalse(quote.explanationEnglish.isEmpty)
-            XCTAssertFalse(quote.explanationVietnamese.isEmpty)
             XCTAssertFalse(quote.english.isEmpty)
             XCTAssertFalse(quote.vietnamese.isEmpty)
         }
     }
 
-    func testEachLossQuoteHasBilingualExplanations() {
+    func testEachLossQuoteHasBilingualText() {
         for quote in NeighborQuotes.all {
-            XCTAssertFalse(quote.explanationEnglish.isEmpty)
-            XCTAssertFalse(quote.explanationVietnamese.isEmpty)
             XCTAssertFalse(quote.english.isEmpty)
             XCTAssertFalse(quote.vietnamese.isEmpty)
         }

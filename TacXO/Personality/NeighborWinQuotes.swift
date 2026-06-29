@@ -1,110 +1,138 @@
 import Foundation
 
 enum NeighborWinQuotes {
-    /// Neighbor's salty lines when the player beats him — denial, excuses, grudging respect.
-    static let all: [NeighborQuote] = [
-        NeighborQuote(
-            english: "Lucky. Pure luck.",
-            vietnamese: "May mắn thôi! Bố cho mày thắng một bàn.",
-            explanationEnglish: "Classic sore loser — claims victory was a gift, not skill.",
-            explanationVietnamese: "Kiểu thua miệng Bắc: 'cho' mày thắng để giữ thể diện bố."
-        ),
-        NeighborQuote(
-            english: "The board was crooked.",
-            vietnamese: "Bàn cờ lệch — bố không thèm cãi.",
-            explanationEnglish: "Blames the equipment rather than admit defeat.",
-            explanationVietnamese: "Đổ lỗi hoàn cảnh — giọng Bắc hay chối khi thua."
-        ),
-        NeighborQuote(
-            english: "I wasn't even trying.",
-            vietnamese: "Bố chơi cho vui, chưa nghiêm đâu.",
-            explanationEnglish: "Pretends the match didn't matter.",
-            explanationVietnamese: "Hạ thấp trận đấu để cứu mặt — 'chơi cho vui'."
-        ),
-        NeighborQuote(
-            english: "Beginner's luck, that's all.",
-            vietnamese: "Trẻ con may mắn — đừng tưởng bố hết cờ.",
-            explanationEnglish: "Dismisses you as a fluke beginner.",
-            explanationVietnamese: "Chê là may mắn tạm thời, bố còn nhiều ván."
-        ),
-        NeighborQuote(
-            english: "My hand slipped. Twice.",
-            vietnamese: "Tay bố đau — mày thắng kiểu gì cũng được.",
-            explanationEnglish: "Fake injury excuse — Northern elder playing victim.",
-            explanationVietnamese: "Giả ốm, giả mệt — miễn không phải thừa nhận mày giỏi hơn."
-        ),
-        NeighborQuote(
-            english: "Fine. You win. Happy now?",
-            vietnamese: "Thắng rồi thì thắng — đừng mặt dày với bố.",
-            explanationEnglish: "Grudging concession with a scold attached.",
-            explanationVietnamese: "Nhượng miệng nhưng chèn lời dạy — vẫn giữ vai trên."
-        ),
-        NeighborQuote(
-            english: "The sun was in my eyes.",
-            vietnamese: "Nắng chói quá, bố nhìn không rõ — tính lại.",
-            explanationEnglish: "Absurd environmental excuse.",
-            explanationVietnamese: "Cớ lý vớ vẩn kiểu hàng xóm Bắc không chịu thua."
-        ),
-        NeighborQuote(
-            english: "Hmph. One game. Means nothing.",
-            vietnamese: "Một ván thôi — bố mày còn cả đời dạy mày.",
-            explanationEnglish: "Minimizes the loss, promises future dominance.",
-            explanationVietnamese: "Hạ một trận, giữ uy thế lâu dài — 'cả đời dạy'."
-        ),
-        NeighborQuote(
-            english: "You cheated. Probably.",
-            vietnamese: "Chắc mày gian rồi — bố tin thế.",
-            explanationEnglish: "Accusation without proof — saves face.",
-            explanationVietnamese: "Vu khống nhẹ để không mất thể diện trước làng."
-        ),
-        NeighborQuote(
-            english: "I'll remember this.",
-            vietnamese: "Bố ghi sổ rồi — lần sau đừng hòng.",
-            explanationEnglish: "Threatens a rematch with ominous Northern tone.",
-            explanationVietnamese: "'Ghi sổ' — hẹn trả thù, giọng ông hàng xóm Bắc."
-        ),
-        NeighborQuote(
-            english: "Even a broken clock is right twice.",
-            vietnamese: "Sao lỗi còn sáng hai lần — mày trúng một bàn.",
-            explanationEnglish: "Compares your win to random chance.",
-            explanationVietnamese: "Thành ngữ chế: thắng một lần không chứng minh giỏi."
-        ),
-        NeighborQuote(
-            english: "Enjoy it. Won't happen again.",
-            vietnamese: "Cười đi — ván sau bố không tha.",
-            explanationEnglish: "Bitter promise of revenge.",
-            explanationVietnamese: "Đe dọa ván tới — thua miệng nhưng không thua thế."
-        ),
-        NeighborQuote(
-            english: "My cat walked on the board.",
-            vietnamese: "Mèo nhà bố chạy qua — coi như bố nhường.",
-            explanationEnglish: "Blames a pet — ridiculous but face-saving.",
-            explanationVietnamese: "Cớ vật nuôi làm lý do nhường — hài mà cay."
-        ),
-        NeighborQuote(
-            english: "You got me. This once.",
-            vietnamese: "Bố mày thừa nhận — một lần. Đừng đắc ý.",
-            explanationEnglish: "Rare grudging admission — still lectures you.",
-            explanationVietnamese: "Thừa nhận có giới hạn — vẫn xưng bố, vẫn dạy."
-        ),
-        NeighborQuote(
-            english: "Storm's coming. Bad omen for you.",
-            vietnamese: "Thắng xong trời sắp mưa — mày coi chừng.",
-            explanationEnglish: "Superstitious curse after losing — Northern folk tone.",
-            explanationVietnamese: "Gán thắng thua với omens — văn hóa làng Bắc."
-        )
-    ]
+  /// Ông Sáu when the player beats him — denial, excuses, grudging respect.
+  static let all: [NeighborQuote] = [
+    NeighborQuote(
+      english: "Lucky. Pure luck.",
+      vietnamese: "May mắn vớ vẩn thôi! Bố bố thí cho mày thắng một ván.",
+    ),
+    NeighborQuote(
+      english: "The board was crooked.",
+      vietnamese: "Bàn cờ này bị lệch — bố không chấp.",
+    ),
+    NeighborQuote(
+      english: "I wasn't even trying.",
+      vietnamese: "Bố chơi cho vui thôi, chưa nghiêm túc gì đâu.",
+    ),
+    NeighborQuote(
+      english: "Beginner's luck, that's all.",
+      vietnamese: "May tạm thời thôi — đừng tưởng bở mà hết nước cờ.",
+    ),
+    NeighborQuote(
+      english: "My hand slipped. Twice.",
+      vietnamese: "Tay bố đang đau nhức — mày thắng kiểu gì cũng được.",
+    ),
+    NeighborQuote(
+      english: "Fine. You win. Happy now?",
+      vietnamese: "Thắng rồi thì thắng — đừng có mặt dày mà vênh váo.",
+    ),
+    NeighborQuote(
+      english: "The sun was in my eyes.",
+      vietnamese: "Nắng chói quá — ván sau bố tính sổ mày.",
+    ),
+    NeighborQuote(
+      english: "Hmph. One game. Means nothing.",
+      vietnamese: "Được một ván thôi — bố còn cả đời để dạy dỗ mày.",
+    ),
+    NeighborQuote(
+      english: "You cheated. Probably.",
+      vietnamese: "Chắc chắn là gian lận rồi — bố tin là thế.",
+    ),
+    NeighborQuote(
+      english: "I'll remember this.",
+      vietnamese: "Bố ghi vào sổ đen — lần sau đừng hòng thoát.",
+    ),
+    NeighborQuote(
+      english: "Even a broken clock is right twice.",
+      vietnamese: "Gà mù đụng trúng — mày trúng một bàn, đừng tưởng bở.",
+    ),
+    NeighborQuote(
+      english: "Enjoy it. Won't happen again.",
+      vietnamese: "Cười đi — ván sau bố không buông tha mày đâu.",
+    ),
+    NeighborQuote(
+      english: "My cat walked on the board.",
+      vietnamese: "Con mèo chạy qua bàn — coi như bố nhường đường.",
+    ),
+    NeighborQuote(
+      english: "You got me. This once.",
+      vietnamese: "Bố thừa nhận — một lần duy nhất thôi. Đừng có mà đắc ý.",
+    ),
+    NeighborQuote(
+      english: "Storm's coming. Bad omen for you.",
+      vietnamese: "Thắng xong trời sắp mưa bão — coi chừng đấy.",
+    ),
+    NeighborQuote(
+      english: "Even the broken clock… you got lucky once.",
+      vietnamese: "Có thời ván đen ăn ván đỏ — hôm nay mày ăn may, mai trả lại.",
+    ),
+    NeighborQuote(
+      english: "Lose today, win tomorrow — not for you.",
+      vietnamese: "Thua keo này bày keo khác — keo sau bố không cho mày bày.",
+    ),
+    NeighborQuote(
+      english: "Heaven helps those who help themselves — barely you.",
+      vietnamese: "Trời sinh voi sinh cỏ — mày ăn may một phen, đừng tưởng mình voi.",
+    ),
+    NeighborQuote(
+      english: "One swallow doesn't make spring.",
+      vietnamese: "Một con én không làm nên mùa xuân — thắng một ván chẳng làm nên cao thủ.",
+    ),
+    NeighborQuote(
+      english: "The river flows, the rock stays — I'm the rock.",
+      vietnamese: "Nước chảy, đá mòn — mày chảy qua, bố vẫn đứng.",
+    ),
+    NeighborQuote(
+      english: "Borrowed clothes never fit — borrowed luck too.",
+      vietnamese: "Ăn miếng trả miếng — may mượn một ván, trả bố ván sau.",
+    ),
+    NeighborQuote(
+      english: "Good wood, bad paint — good luck, bad player.",
+      vietnamese: "Tốt gỗ hơn tốt nước sơn — mày may một lần, dở cả đời.",
+    ),
+    NeighborQuote(
+      english: "The moon has phases — so does my mercy. Not today.",
+      vietnamese: "Trăng khuyết rồi lại tròn — lần sau bố không nhường đâu.",
+    ),
+    NeighborQuote(
+      english: "Fortune favors fools sometimes.",
+      vietnamese: "Cười người hôm trước, hôm sau người cười — hôm nay mày cười, mai khóc.",
+    ),
+    NeighborQuote(
+      english: "Rice falls to the lucky — not skill.",
+      vietnamese: "Gạo rơi thì gà ăn — mày ăn may chứ giỏi gì.",
+    ),
+    NeighborQuote(
+      english: "Ants pile up over time.",
+      vietnamese: "Kiến tha lâu cũng đầy tổ — mày thắng một lần, bố nhớ mãi.",
+    ),
+    NeighborQuote(
+      english: "Walk at night, meet trouble.",
+      vietnamese: "Đi đêm có ngày gặp ma — thắng bố một lần, coi chừng.",
+    ),
+    NeighborQuote(
+      english: "Empty belly, empty head.",
+      vietnamese: "Ăn không no, cày không sâu — mày thắng may, óc vẫn nông.",
+    ),
+    NeighborQuote(
+      english: "One game doesn't make a master.",
+      vietnamese: "Học ăn, học nói, học gói, học mở — mày mới học thắng một bài.",
+    ),
+    NeighborQuote(
+      english: "Luck runs out like water.",
+      vietnamese: "Nước đến chân mới nhảy — may đến đầu mày mới biết đỡ.",
+    ),
+  ]
 
-    static func random(language: AppLanguage) -> NeighborQuote {
-        all.randomElement() ?? fallback(for: language)
-    }
+  static func random(language: AppLanguage) -> NeighborQuote {
+    all.randomElement() ?? fallback(for: language)
+  }
 
-    private static func fallback(for language: AppLanguage) -> NeighborQuote {
-        NeighborQuote(
-            english: "Hmph.",
-            vietnamese: "Hừm… ván này bố nhường.",
-            explanationEnglish: "A short grumble — refuses to celebrate with you.",
-            explanationVietnamese: "'Nhường' — cách Bắc thua mà vẫn cao ngạo."
-        )
-    }
+  private static func fallback(for language: AppLanguage) -> NeighborQuote {
+    NeighborQuote(
+      english: "Hmph.",
+      vietnamese: "Hừm… ván này bố nhường cho vui vậy.",
+    )
+  }
 }

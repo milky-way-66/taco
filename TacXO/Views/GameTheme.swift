@@ -16,6 +16,8 @@ enum GameTheme {
     static let newGameSpring = Animation.spring(response: 0.55, dampingFraction: 0.82)
     static let newGameExit = Animation.easeIn(duration: 0.24)
     static let thinkingPulse = Animation.easeInOut(duration: 0.32)
+    static let commentSpring = Animation.spring(response: 0.48, dampingFraction: 0.72)
+    static let commentExit = Animation.spring(response: 0.38, dampingFraction: 0.86)
 
     static func cellSize(dimension: Int, availableSize: CGSize) -> CGFloat {
         let horizontalInset: CGFloat = 20

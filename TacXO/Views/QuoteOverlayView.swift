@@ -4,11 +4,14 @@ struct QuoteOverlayView: View {
     let quote: NeighborQuote
     let kind: QuoteOverlayKind
     let language: AppLanguage
+    let hardnessPercent: Int
+    let hardnessDelta: Int
+    let winStreak: Int
     let onDismiss: () -> Void
 
     @State private var showTitle = false
     @State private var showQuote = false
-    @State private var showDetails = false
+    @State private var showHardness = false
     @State private var showHint = false
 
     private var palette: QuotePalette {
@@ -17,10 +20,6 @@ struct QuoteOverlayView: View {
 
     private var titleKey: String.LocalizationValue {
         kind == .victory ? "win_victory" : "loss_defeated"
-    }
-
-    private var subtitleKey: String.LocalizationValue {
-        kind == .victory ? "win_neighbor_mutters" : "loss_neighbor_says"
     }
 
     var body: some View {
@@ -34,7 +33,7 @@ struct QuoteOverlayView: View {
                         .opacity(showTitle ? 1 : 0)
                         .offset(y: showTitle ? 0 : 8)
 
-                    Text(String(localized: titleKey))
+                    Text(String(localized: titleKey, locale: language.locale))
                         .font(.system(size: kind == .victory ? 16 : 14, weight: .bold, design: .serif))
                         .tracking(6)
                         .foregroundStyle(palette.title)
@@ -53,26 +52,27 @@ struct QuoteOverlayView: View {
                     .multilineTextAlignment(.center)
                     .foregroundStyle(palette.quote)
                     .lineSpacing(6)
-                    .padding(.horizontal, 28)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 14)
+                    .background {
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .fill(palette.quoteBackground)
+                    }
+                    .padding(.horizontal, 20)
                     .opacity(showQuote ? 1 : 0)
                     .offset(y: showQuote ? 0 : 16)
 
-                VStack(spacing: 14) {
-                    Text(String(localized: subtitleKey))
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
-                        .tracking(3)
-                        .foregroundStyle(palette.subtitle)
+                HardnessEndGameReveal(
+                    previousPercent: hardnessPercent - hardnessDelta,
+                    currentPercent: hardnessPercent,
+                    delta: hardnessDelta,
+                    winStreak: winStreak
+                )
+                .opacity(showHardness ? 1 : 0)
+                .offset(y: showHardness ? 0 : 18)
+                .scaleEffect(showHardness ? 1 : 0.92)
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        explanationRow(flag: "🇬🇧", text: quote.explanationEnglish)
-                        explanationRow(flag: "🇻🇳", text: quote.explanationVietnamese)
-                    }
-                }
-                .padding(.horizontal, 32)
-                .opacity(showDetails ? 1 : 0)
-                .offset(y: showDetails ? 0 : 12)
-
-                Text(String(localized: "loss_tap_continue"))
+                Text(String(localized: "loss_tap_continue", locale: language.locale))
                     .font(.system(size: 12, weight: .medium, design: .serif))
                     .tracking(2)
                     .foregroundStyle(palette.hint)
@@ -110,8 +110,8 @@ struct QuoteOverlayView: View {
                 withAnimation(.easeOut(duration: 0.7).delay(0.1)) { showTitle = true }
                 withAnimation(.easeOut(duration: 0.85).delay(0.35)) { showQuote = true }
             }
-            withAnimation(.easeOut(duration: 0.7).delay(0.9)) { showDetails = true }
-            withAnimation(.easeInOut(duration: 0.6).delay(1.6)) { showHint = true }
+            withAnimation(.spring(response: 0.62, dampingFraction: 0.78).delay(0.55)) { showHardness = true }
+            withAnimation(.easeInOut(duration: 0.6).delay(1.2)) { showHint = true }
         }
     }
 
@@ -134,60 +134,45 @@ struct QuoteOverlayView: View {
         )
         .frame(height: 1)
     }
-
-    private func explanationRow(flag: String, text: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text(flag)
-                .font(.footnote)
-            Text(text)
-                .font(.system(.footnote, design: .serif))
-                .foregroundStyle(palette.explanation)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
 }
 
 private struct QuotePalette {
     let title: Color
     let titleGlow: Color
     let quote: Color
-    let subtitle: Color
-    let explanation: Color
+    let quoteBackground: Color
     let line: Color
     let panelGradient: [Color]
     let hint: Color
     let backdropMaterial: Material
 
     static let victory = QuotePalette(
-        title: Color(red: 0.85, green: 0.68, blue: 0.22),
-        titleGlow: Color(red: 0.85, green: 0.68, blue: 0.22).opacity(0.4),
-        quote: Color(red: 0.12, green: 0.28, blue: 0.52),
-        subtitle: Color(red: 0.18, green: 0.36, blue: 0.62),
-        explanation: Color(red: 0.28, green: 0.38, blue: 0.52).opacity(0.85),
+        title: Color(red: 0.72, green: 0.52, blue: 0.08),
+        titleGlow: Color(red: 0.85, green: 0.68, blue: 0.22).opacity(0.35),
+        quote: Color(red: 0.05, green: 0.16, blue: 0.34),
+        quoteBackground: Color.white.opacity(0.88),
         line: Color(red: 0.85, green: 0.68, blue: 0.22),
         panelGradient: [
-            Color.white.opacity(0.72),
-            Color.white.opacity(0.94),
+            Color.white.opacity(0.82),
+            Color.white.opacity(0.96),
             Color(red: 0.95, green: 0.97, blue: 1.0)
         ],
-        hint: Color(red: 0.18, green: 0.36, blue: 0.62).opacity(0.6),
+        hint: Color(red: 0.20, green: 0.34, blue: 0.52).opacity(0.82),
         backdropMaterial: .thickMaterial
     )
 
     static let defeat = QuotePalette(
-        title: Color(red: 0.92, green: 0.28, blue: 0.28),
-        titleGlow: Color(red: 0.75, green: 0.12, blue: 0.12).opacity(0.55),
-        quote: Color.white.opacity(0.93),
-        subtitle: Color(red: 0.88, green: 0.32, blue: 0.32),
-        explanation: Color.white.opacity(0.48),
-        line: Color(red: 0.82, green: 0.22, blue: 0.22),
+        title: Color(red: 1.0, green: 0.58, blue: 0.58),
+        titleGlow: Color(red: 0.95, green: 0.22, blue: 0.22).opacity(0.45),
+        quote: Color(red: 0.98, green: 0.96, blue: 0.94),
+        quoteBackground: Color.white.opacity(0.12),
+        line: Color(red: 0.95, green: 0.45, blue: 0.45),
         panelGradient: [
-            Color.black.opacity(0.35),
-            Color(red: 0.1, green: 0.05, blue: 0.07).opacity(0.88),
-            Color(red: 0.06, green: 0.04, blue: 0.05).opacity(0.96)
+            Color(red: 0.20, green: 0.08, blue: 0.10).opacity(0.94),
+            Color(red: 0.14, green: 0.06, blue: 0.08).opacity(0.98),
+            Color(red: 0.10, green: 0.05, blue: 0.06)
         ],
-        hint: Color.white.opacity(0.38),
+        hint: Color(red: 0.84, green: 0.82, blue: 0.80),
         backdropMaterial: .ultraThickMaterial
     )
 }

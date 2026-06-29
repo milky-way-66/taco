@@ -3,18 +3,16 @@ import Observation
 
 @Observable
 final class GameController {
-    /// Neighbor’s first move feels snappy; later moves ramp up but stay under 800ms.
-    private static let aiThinkBaseMs = 100
-    private static let aiThinkStepMs = 100
-    private static let aiThinkMaxMs = 800
-
     var settings: GameSettings
     private(set) var engine: GameEngine
     private(set) var difficulty = AdaptiveDifficulty()
     private(set) var isAIThinking = false
     private(set) var isWinCelebrating = false
     var quoteOverlay: QuoteOverlay?
+    private(set) var neighborComment: NeighborComment?
     private(set) var gameID = UUID()
+
+    private var commentDismissTask: Task<Void, Never>?
 
     /// Human is always X; Neighbor is O in vs Neighbor mode
     var isHumanTurn: Bool {
@@ -41,6 +39,7 @@ final class GameController {
         isWinCelebrating = false
         engine = GameEngine(settings: settings)
         quoteOverlay = nil
+        clearNeighborComment()
         gameID = UUID()
     }
 
@@ -52,27 +51,26 @@ final class GameController {
         guard canAcceptInput else { return }
         guard engine.canPlay(at: cell) else { return }
 
+        let beforeMove = engine
         performMove(at: cell)
 
         guard settings.mode == .vsNeighbor, engine.result == .ongoing else { return }
 
+        maybeComment(on: cell, before: beforeMove)
+
         isAIThinking = true
         let snapshot = engine
-        let level = difficulty.level
-        let oMovesPlayed = snapshot.cells.values.filter { $0 == .o }.count
-        let thinkDuration = Self.aiThinkDuration(oMovesPlayed: oMovesPlayed)
+        let hardness = difficulty.hardnessPercent
 
         Task { @MainActor in
             defer { isAIThinking = false }
 
-            async let aiMove = Task.detached(priority: .userInitiated) {
-                AIPlayer.bestMove(for: snapshot, difficulty: level)
+            let aiMove = await Task.detached(priority: .high) {
+                AIPlayer.bestMove(for: snapshot, hardness: hardness)
             }.value
 
-            try? await Task.sleep(for: thinkDuration)
-
             guard engine.result == .ongoing else { return }
-            performMove(at: await aiMove)
+            performMove(at: aiMove)
         }
     }
 
@@ -90,7 +88,40 @@ final class GameController {
         }
     }
 
+    private func maybeComment(on move: Cell, before engine: GameEngine) {
+        let assessment = AIPlayer.assessHumanMove(
+            move,
+            before: engine,
+            hardness: difficulty.hardnessPercent
+        )
+        guard let text = NeighborMoveComments.comment(
+            for: assessment,
+            move: move,
+            moveNumber: engine.cells.count,
+            language: settings.language
+        ) else { return }
+
+        neighborComment = NeighborComment(
+            text: text,
+            mood: assessment.quality.commentMood
+        )
+
+        commentDismissTask?.cancel()
+        commentDismissTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(4500))
+            guard !Task.isCancelled else { return }
+            neighborComment = nil
+        }
+    }
+
+    private func clearNeighborComment() {
+        commentDismissTask?.cancel()
+        commentDismissTask = nil
+        neighborComment = nil
+    }
+
     private func handleGameEnd(winner: Mark) {
+        clearNeighborComment()
         isWinCelebrating = true
         Task { @MainActor in
             try? await Task.sleep(for: .milliseconds(1500))
@@ -103,29 +134,51 @@ final class GameController {
         }
 
         if winner == .x {
-            difficulty.recordWin()
+            let delta = difficulty.recordWin()
             SoundManager.shared.playWin()
-            presentQuote(NeighborWinQuotes.random(language: settings.language), kind: .victory)
+            presentQuote(
+                NeighborWinQuotes.random(language: settings.language),
+                kind: .victory,
+                hardnessPercent: difficulty.hardnessPercent,
+                hardnessDelta: delta,
+                winStreak: difficulty.winStreak
+            )
         } else {
-            difficulty.recordLoss()
+            let delta = difficulty.recordLoss()
             SoundManager.shared.playNeighborLoss()
-            presentQuote(NeighborQuotes.random(language: settings.language), kind: .defeat)
+            presentQuote(
+                NeighborQuotes.random(language: settings.language),
+                kind: .defeat,
+                hardnessPercent: difficulty.hardnessPercent,
+                hardnessDelta: delta,
+                winStreak: difficulty.winStreak
+            )
         }
     }
 
-    private func presentQuote(_ quote: NeighborQuote, kind: QuoteOverlayKind) {
-        quoteOverlay = QuoteOverlay(quote: quote, kind: kind)
-    }
-
-    private static func aiThinkDuration(oMovesPlayed: Int) -> Duration {
-        let milliseconds = min(aiThinkMaxMs, aiThinkBaseMs + oMovesPlayed * aiThinkStepMs)
-        return .milliseconds(milliseconds)
+    private func presentQuote(
+        _ quote: NeighborQuote,
+        kind: QuoteOverlayKind,
+        hardnessPercent: Int,
+        hardnessDelta: Int,
+        winStreak: Int
+    ) {
+        quoteOverlay = QuoteOverlay(
+            quote: quote,
+            kind: kind,
+            hardnessPercent: hardnessPercent,
+            hardnessDelta: hardnessDelta,
+            winStreak: winStreak
+        )
     }
 }
 
 struct QuoteOverlay: Equatable {
     let quote: NeighborQuote
     let kind: QuoteOverlayKind
+    let hardnessPercent: Int
+    let hardnessDelta: Int
+    let winStreak: Int
 }
 
 enum QuoteOverlayKind: Equatable {
