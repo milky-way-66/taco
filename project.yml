@@ -1,4 +1,8 @@
 name: TacXO
+packages:
+  comunication:
+    url: https://github.com/milky-way-66/communication-kit.git
+    branch: 1.0.0
 options:
   bundleIdPrefix: com.tacxo
   deploymentTarget:
@@ -18,6 +22,11 @@ targets:
       - path: TacXO
         excludes:
           - "**/.gitkeep"
+    dependencies:
+      - package: comunication
+        product: ComunicationCore
+      - package: comunication
+        product: ComunicationMPC
     settings:
       base:
         PRODUCT_NAME: TacXO
@@ -32,6 +41,9 @@ targets:
         SWIFT_EMIT_LOC_STRINGS: YES
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         ENABLE_PREVIEWS: YES
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: "TacXO uses the local network to find nearby players and sync moves during PvP games."
+        INFOPLIST_KEY_NSBonjourServices:
+          - _tacxo-pvp._tcp
   TacXOTests:
     type: bundle.unit-test
     platform: iOS
