@@ -1,0 +1,34 @@
+---
+description: TacXO DDD + TDD workflow — docs first, then tests, then code
+alwaysApply: true
+---
+
+# TacXO: Docs → Tests → Code
+
+Follow **Documentation-Driven Development** then **Test-Driven Development**. Full guide: `docs/development-workflow.md`.
+
+## Mandatory order
+
+1. **Doc** — Write or update a spec with numbered acceptance criteria before any production code.
+2. **Test** — Add a failing test in `TacXOTests/` mapped to a criterion. Run and confirm it fails for the right reason.
+3. **Code** — Minimal change in `TacXO/` to pass. Run full test suite.
+4. **Maintain** — Update spec status, `README.md`, and `PRIVACY.md` if user-facing.
+
+## Spec locations
+
+- Feature/product: `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+- Small change: `docs/features/YYYY-MM-DD-<topic>.md`
+- Template: `docs/templates/feature-spec.md`
+
+## Hard rules
+
+- **No production code without a failing test first.** If code was written early, delete it and re-implement from tests.
+- **No behavior change without a doc update** in the same session/PR.
+- **Every acceptance criterion** needs at least one test.
+- Bug fixes: failing test that reproduces the bug, then fix.
+
+## Verify
+
+```bash
+xcodebuild -scheme TacXO -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
+```

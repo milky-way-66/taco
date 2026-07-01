@@ -13,6 +13,7 @@ final class GameController {
     private(set) var gameID = UUID()
 
     private var commentDismissTask: Task<Void, Never>?
+    private var speechVariety = NeighborSpeechVariety()
 
     /// Human is always X; Neighbor is O in vs Neighbor mode
     var isHumanTurn: Bool {
@@ -40,6 +41,7 @@ final class GameController {
         engine = GameEngine(settings: settings)
         quoteOverlay = nil
         clearNeighborComment()
+        speechVariety.resetGameComments()
         gameID = UUID()
     }
 
@@ -94,11 +96,13 @@ final class GameController {
             before: engine,
             hardness: difficulty.hardnessPercent
         )
+        guard assessment.shouldComment else { return }
+        guard shouldNeighborSpeakUp(for: assessment) else { return }
+
         guard let text = NeighborMoveComments.comment(
             for: assessment,
-            move: move,
-            moveNumber: engine.cells.count,
-            language: settings.language
+            language: settings.language,
+            variety: &speechVariety
         ) else { return }
 
         neighborComment = NeighborComment(
@@ -137,7 +141,7 @@ final class GameController {
             let delta = difficulty.recordWin()
             SoundManager.shared.playWin()
             presentQuote(
-                NeighborWinQuotes.random(language: settings.language),
+                speechVariety.nextWinQuote(),
                 kind: .victory,
                 hardnessPercent: difficulty.hardnessPercent,
                 hardnessDelta: delta,
@@ -147,12 +151,25 @@ final class GameController {
             let delta = difficulty.recordLoss()
             SoundManager.shared.playNeighborLoss()
             presentQuote(
-                NeighborQuotes.random(language: settings.language),
+                speechVariety.nextDefeatQuote(),
                 kind: .defeat,
                 hardnessPercent: difficulty.hardnessPercent,
                 hardnessDelta: delta,
                 winStreak: difficulty.winStreak
             )
+        }
+    }
+
+    /// Praise is occasional; blunders always get a reaction.
+    private func shouldNeighborSpeakUp(for assessment: HumanMoveAssessment) -> Bool {
+        switch assessment.reason {
+        case .missedImmediateWin, .oneMoveFromLoss:
+            return true
+        case .strongMove:
+            let threshold = assessment.quality == .excellent ? 0.65 : 0.4
+            return Double.random(in: 0..<1) < threshold
+        case .weakMove:
+            return false
         }
     }
 

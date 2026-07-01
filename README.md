@@ -4,11 +4,15 @@ Offline tic-tac-toe for iOS with a paper-classic look and a grumpy AI neighbor (
 
 - **2 Players** — pass-and-play on one device
 - **vs Neighbor** — adaptive AI with sarcastic quotes, sound, and haptics
-- **Custom rules** — board size (3×3, 5×5, 10×10), win length (3–7)
+- **Custom rules** — board size (3×3, 5×5, 10×10, 14×14, 16×16), win length (3–7)
 - **Languages** — English and Vietnamese
 - **No accounts, no ads, no internet required**
 
 Requires iOS 17 or later.
+
+## Development
+
+TacXO uses **documentation-driven** and **test-driven** development: write specs first, then tests, then code. See [Development workflow](docs/development-workflow.md).
 
 ## Support
 

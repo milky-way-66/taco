@@ -13,32 +13,35 @@ struct NeighborMoveComment: Equatable {
 enum NeighborMoveComments {
     static func comment(
         for assessment: HumanMoveAssessment,
-        move: Cell,
-        moveNumber: Int,
-        language: AppLanguage
+        language: AppLanguage,
+        variety: inout NeighborSpeechVariety
     ) -> String? {
         guard assessment.shouldComment else { return nil }
 
         let address = NeighborPlayerAddress.forAssessment(assessment)
+        let poolKey: String
         let pool: [NeighborMoveComment]
         switch assessment.reason {
         case .missedImmediateWin:
+            poolKey = "missedWin"
             pool = missedWin
         case .oneMoveFromLoss:
+            poolKey = "oneMoveFromLoss"
             pool = oneMoveFromLoss
         case .strongMove:
-            pool = assessment.quality == .excellent ? excellentMove : goodMove
+            if assessment.quality == .excellent {
+                poolKey = "excellentMove"
+                pool = excellentMove
+            } else {
+                poolKey = "goodMove"
+                pool = goodMove
+            }
         case .weakMove:
             return nil
         }
 
-        let index = selectionIndex(move: move, moveNumber: moveNumber, poolSize: pool.count)
+        let index = variety.nextMoveCommentIndex(poolKey: poolKey, poolSize: pool.count)
         return pool[index].text(for: language, address: address)
-    }
-
-    private static func selectionIndex(move: Cell, moveNumber: Int, poolSize: Int) -> Int {
-        guard poolSize > 0 else { return 0 }
-        return (move.x * 7 + move.y * 13 + moveNumber) % poolSize
     }
 
     private static let missedWin: [NeighborMoveComment] = [

@@ -4,6 +4,8 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
     case three = "3×3"
     case five = "5×5"
     case ten = "10×10"
+    case fourteen = "14×14"
+    case sixteen = "16×16"
 
     var id: String { rawValue }
 
@@ -12,6 +14,8 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
         case .three: return 3
         case .five: return 5
         case .ten: return 10
+        case .fourteen: return 14
+        case .sixteen: return 16
         }
     }
 

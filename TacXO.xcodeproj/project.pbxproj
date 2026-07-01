@@ -35,12 +35,14 @@
 		B3996018154EFEDAD6D49353 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */; };
 		BF3AAAE6D3B64B696F6FB79F /* neighbor_loss_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8EAA49A24FEC371863A8CEE3 /* neighbor_loss_3.wav */; };
 		D4444C33B392D64782546BAE /* NeighborMoveComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3EC4F77C70F39CFEF354D /* NeighborMoveComments.swift */; };
+		D8A1F2E34B5C6D7E8F901234 /* NeighborSpeechVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* NeighborSpeechVariety.swift */; };
 		D87B4EEE1CE599C428172A2D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE21B7DDBB2EEB43EC7CB /* GameEngine.swift */; };
 		D9ED113DE88239D8C0F060E2 /* Neighbor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE688B7CE2D78E1393B99AFC /* Neighbor.swift */; };
 		E07AFD40A6B964AF419D15BE /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */; };
 		E548A191F7986234FB0536CE /* QuoteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5574D8ACC4CCF6B3BFABD60 /* QuoteOverlayView.swift */; };
 		E68D082828A2333EE04C24C3 /* MoveCommentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE609F7E507326E82864DFB6 /* MoveCommentTests.swift */; };
 		E7EC95D217D90DA7876FF723 /* NeighborQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */; };
+		F1A2B3C4D5E6F708192A3B4C /* NeighborSpeechVarietyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* NeighborSpeechVarietyTests.swift */; };
 		EC24DE77EAD830F145D14C4D /* NeighborWinQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131FC872C7A4CEDC883CB47 /* NeighborWinQuotes.swift */; };
 		ED1D46D8FFD312A14CAA0F26 /* neighbor_loss_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D554D0DFD010F3690343738C /* neighbor_loss_1.wav */; };
 		EEE236BF844F116C4002821C /* WinChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E6CE9C9835DBE03EC1B354 /* WinChecker.swift */; };
@@ -73,6 +75,7 @@
 		3FD47B47495A1FC88EEFE090 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		4E3489B77DE7D0F260049D4A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotesTests.swift; sourceTree = "<group>"; };
+		B2C3D4E5F60718293A4B5C6D /* NeighborSpeechVarietyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechVarietyTests.swift; sourceTree = "<group>"; };
 		56DBDC0FB9531FF058A35A46 /* ATTRIBUTIONS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ATTRIBUTIONS.md; sourceTree = "<group>"; };
 		6131FC872C7A4CEDC883CB47 /* NeighborWinQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborWinQuotes.swift; sourceTree = "<group>"; };
 		67D42A1ED5CFC47A62212E43 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 		8EAA49A24FEC371863A8CEE3 /* neighbor_loss_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_3.wav; sourceTree = "<group>"; };
 		99FC4226CBB4D1A6DC491C7B /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
 		9FA3EC4F77C70F39CFEF354D /* NeighborMoveComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborMoveComments.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* NeighborSpeechVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechVariety.swift; sourceTree = "<group>"; };
 		A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		A9619A3FCE5E71572CDE01CF /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
 		AA6310856F6ACD8839F5B9DF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				EE688B7CE2D78E1393B99AFC /* Neighbor.swift */,
 				9FA3EC4F77C70F39CFEF354D /* NeighborMoveComments.swift */,
 				051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */,
+				A1B2C3D4E5F60718293A4B5C /* NeighborSpeechVariety.swift */,
 				6131FC872C7A4CEDC883CB47 /* NeighborWinQuotes.swift */,
 				18E76001B409E6A8FEB6C9F7 /* SoundManager.swift */,
 			);
@@ -207,6 +212,7 @@
 				74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */,
 				EE609F7E507326E82864DFB6 /* MoveCommentTests.swift */,
 				52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */,
+				B2C3D4E5F60718293A4B5C6D /* NeighborSpeechVarietyTests.swift */,
 				6A296CE0A4ACC9C6FEAC0D0C /* TacXOTests.swift */,
 				35514A8A6C25B66BA4D02E25 /* WinCheckerTests.swift */,
 			);
@@ -335,6 +341,7 @@
 				B3996018154EFEDAD6D49353 /* GameEngineTests.swift in Sources */,
 				E68D082828A2333EE04C24C3 /* MoveCommentTests.swift in Sources */,
 				E7EC95D217D90DA7876FF723 /* NeighborQuotesTests.swift in Sources */,
+				F1A2B3C4D5E6F708192A3B4C /* NeighborSpeechVarietyTests.swift in Sources */,
 				07B9DA823F7604C292904C1D /* TacXOTests.swift in Sources */,
 				098EF0E6B06594349566FBD6 /* WinCheckerTests.swift in Sources */,
 			);
@@ -360,6 +367,7 @@
 				D9ED113DE88239D8C0F060E2 /* Neighbor.swift in Sources */,
 				EFEF1E4296540E0255F404AD /* NeighborComment.swift in Sources */,
 				D4444C33B392D64782546BAE /* NeighborMoveComments.swift in Sources */,
+				D8A1F2E34B5C6D7E8F901234 /* NeighborSpeechVariety.swift in Sources */,
 				19EF3C1ABF90D679251E7D77 /* NeighborQuote.swift in Sources */,
 				A0FB9A57E05B3AD4678EE498 /* NeighborQuotes.swift in Sources */,
 				4413EBFC36784A20D7B0C2D0 /* NeighborSpeechBubbleView.swift in Sources */,
