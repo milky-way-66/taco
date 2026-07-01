@@ -1,9 +1,35 @@
 import Foundation
 
-enum GameResult: Equatable {
+enum GameResult: Equatable, Codable {
     case ongoing
     case won(Mark)
     case draw
+
+    private enum CodingKeys: String, CodingKey { case kind, mark }
+
+    private enum Kind: String, Codable { case ongoing, won, draw }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        switch try container.decode(Kind.self, forKey: .kind) {
+        case .ongoing: self = .ongoing
+        case .won: self = .won(try container.decode(Mark.self, forKey: .mark))
+        case .draw: self = .draw
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case .ongoing:
+            try container.encode(Kind.ongoing, forKey: .kind)
+        case .won(let mark):
+            try container.encode(Kind.won, forKey: .kind)
+            try container.encode(mark, forKey: .mark)
+        case .draw:
+            try container.encode(Kind.draw, forKey: .kind)
+        }
+    }
 }
 
 enum GameError: Error {
@@ -24,11 +50,25 @@ struct GameEngine {
         self.settings = settings
     }
 
-    internal init(settings: GameSettings, cells: [Cell: Mark], currentPlayer: Mark, result: GameResult = .ongoing) {
+    internal init(
+        settings: GameSettings,
+        cells: [Cell: Mark],
+        currentPlayer: Mark,
+        result: GameResult = .ongoing,
+        winningCells: Set<Cell> = []
+    ) {
         self.settings = settings
         self.cells = cells
         self.currentPlayer = currentPlayer
         self.result = result
+        self.winningCells = winningCells
+    }
+
+    mutating func apply(_ state: NearbyGameState) {
+        cells = state.cells
+        currentPlayer = state.currentPlayer
+        result = state.result
+        winningCells = state.winningCells
     }
 
     func canPlay(at cell: Cell) -> Bool {

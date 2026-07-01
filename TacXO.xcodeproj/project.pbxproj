@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078D63B6ADC1F3B338507E01 /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407E5A5E7D496B9976F7B26F /* AppIdentity.swift */; };
 		07B9DA823F7604C292904C1D /* TacXOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A296CE0A4ACC9C6FEAC0D0C /* TacXOTests.swift */; };
 		098EF0E6B06594349566FBD6 /* WinCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35514A8A6C25B66BA4D02E25 /* WinCheckerTests.swift */; };
+		10B161DF1643CD8EA8F07BEE /* NearbyGameMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1220FA0A1A196D9554DD3 /* NearbyGameMessageTests.swift */; };
 		16C3CBADC200EC32C843A594 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E76001B409E6A8FEB6C9F7 /* SoundManager.swift */; };
 		19EF3C1ABF90D679251E7D77 /* NeighborQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB1F8ADDEB18FFD387D30A2 /* NeighborQuote.swift */; };
 		20B056AAA166C9468D1064EF /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB5A7AC06360F0DA248B836 /* AppLanguage.swift */; };
@@ -26,24 +28,33 @@
 		5D33F98E5EDF8D85E2F333CA /* HumanMoveAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CF652507BB5486906862AF /* HumanMoveAssessment.swift */; };
 		5D3CACC0A93792A3A4ECD2E2 /* TacXOApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758025185F684C7F1136F5 /* TacXOApp.swift */; };
 		5EB399B01301715A2F78D91B /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D42A1ED5CFC47A62212E43 /* GameController.swift */; };
+		7301F10C0BD00EAA4DB944E7 /* NearbyPeerBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E645C24386374B4AFAA842 /* NearbyPeerBrowser.swift */; };
 		77A814F3056CCBB076ADBB17 /* NeighborSpeechVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6107508BB0EC0AAF103358E /* NeighborSpeechVariety.swift */; };
 		77FAE3F9A6A3505CD6DC9339 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE42257461FC6F6D64C63C57 /* Assets.xcassets */; };
 		783A2853430884781D7719E8 /* AIPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21C25A0B68199B29B41907B /* AIPlayer.swift */; };
 		853590898FF9DC322A051994 /* AdaptiveDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A1B07642E0E2F4EDE30E68 /* AdaptiveDifficulty.swift */; };
+		886AFA88D23EFFD3CC5DB999 /* NearbySessionPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F058D0D3949BB1438CE1BF /* NearbySessionPhase.swift */; };
 		8CCE4936C88B2E2B5A4399C3 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FC4226CBB4D1A6DC491C7B /* Mark.swift */; };
 		9131D1E60AA572A1DC1A7F19 /* WinCelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */; };
 		9686E481E1A1C1F1C82CD780 /* ComunicationMPC in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE93B53BA8DF5C1910E6A62 /* ComunicationMPC */; };
 		9BC0F9E09DF776F1205F395E /* NeighborSpeechVarietyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AFFA2E30B7D3FA1685A04 /* NeighborSpeechVarietyTests.swift */; };
 		A0FB9A57E05B3AD4678EE498 /* NeighborQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */; };
+		A3FF52B7E135BFBC09DB621F /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991FA298BF6442B2555586 /* TransferService.swift */; };
 		B0824588F3B393345460AD48 /* AdaptiveDifficultyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */; };
 		B3996018154EFEDAD6D49353 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */; };
+		BD384FD7004FD7E80588593A /* NearbyGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5131351DE6F8BE5970A56E /* NearbyGameService.swift */; };
+		BE4F0D4FD4500182C808A212 /* NearbyPauseOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD727FF9AB9165B2EF94D9C /* NearbyPauseOverlay.swift */; };
 		BF3AAAE6D3B64B696F6FB79F /* neighbor_loss_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8EAA49A24FEC371863A8CEE3 /* neighbor_loss_3.wav */; };
+		D283FD9F41258A89B6AC9A93 /* NearbyGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EB2C7606FB5239E8B5DFB /* NearbyGameController.swift */; };
 		D4444C33B392D64782546BAE /* NeighborMoveComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA3EC4F77C70F39CFEF354D /* NeighborMoveComments.swift */; };
 		D87B4EEE1CE599C428172A2D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE21B7DDBB2EEB43EC7CB /* GameEngine.swift */; };
 		D9ED113DE88239D8C0F060E2 /* Neighbor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE688B7CE2D78E1393B99AFC /* Neighbor.swift */; };
+		DBAB592D4BBA3BBD7FED2E70 /* NearbyBrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2429D864126851A251CB2E /* NearbyBrowseView.swift */; };
+		DED4D8481A21B686CEB4953F /* NearbyWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECB0D122856E2C1F036EF41 /* NearbyWaitingView.swift */; };
 		E07AFD40A6B964AF419D15BE /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */; };
 		E548A191F7986234FB0536CE /* QuoteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5574D8ACC4CCF6B3BFABD60 /* QuoteOverlayView.swift */; };
 		E68D082828A2333EE04C24C3 /* MoveCommentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE609F7E507326E82864DFB6 /* MoveCommentTests.swift */; };
+		E6BDCE290C1B89F956D09BED /* NearbyGameControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A23DDBAD5F1DF843341BD3 /* NearbyGameControllerTests.swift */; };
 		E7EC95D217D90DA7876FF723 /* NeighborQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */; };
 		EC24DE77EAD830F145D14C4D /* NeighborWinQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6131FC872C7A4CEDC883CB47 /* NeighborWinQuotes.swift */; };
 		ED1D46D8FFD312A14CAA0F26 /* neighbor_loss_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D554D0DFD010F3690343738C /* neighbor_loss_1.wav */; };
@@ -52,6 +63,7 @@
 		F37F2A17E69F66AB315ECDE7 /* GameTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303BCC6F0F3B70C7F438F4B /* GameTheme.swift */; };
 		F81BC303F2C5BF47564BFF56 /* neighbor_loss_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = A9619A3FCE5E71572CDE01CF /* neighbor_loss_2.wav */; };
 		F99344BC9662044B319480DF /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3941829C6F5C2A4BDA1D7D /* CellView.swift */; };
+		FD740FC42B961119F2BD9855 /* NearbyGameMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2B17C017C072C6E379057D /* NearbyGameMessage.swift */; };
 		FF07E20F5506802EB6D7CB0B /* AIPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F529C534C1AD55CBB3409D /* AIPlayerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,36 +80,47 @@
 /* Begin PBXFileReference section */
 		051798E29C48A8EB2E928FAB /* NeighborQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotes.swift; sourceTree = "<group>"; };
 		05D038008BF4660E34AAB50C /* HardnessViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardnessViews.swift; sourceTree = "<group>"; };
+		0B2429D864126851A251CB2E /* NearbyBrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyBrowseView.swift; sourceTree = "<group>"; };
 		0DAB25A1FB6E33229FBD3D0D /* NeighborComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborComment.swift; sourceTree = "<group>"; };
 		0EB21894C197E44771C9E74F /* TacXOTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TacXOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E76001B409E6A8FEB6C9F7 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		222E65A302069B6B1DEA8A5F /* WinCelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCelebrationView.swift; sourceTree = "<group>"; };
 		2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
+		2FD727FF9AB9165B2EF94D9C /* NearbyPauseOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPauseOverlay.swift; sourceTree = "<group>"; };
 		35514A8A6C25B66BA4D02E25 /* WinCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinCheckerTests.swift; sourceTree = "<group>"; };
+		36F058D0D3949BB1438CE1BF /* NearbySessionPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySessionPhase.swift; sourceTree = "<group>"; };
 		3FD47B47495A1FC88EEFE090 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		407E5A5E7D496B9976F7B26F /* AppIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIdentity.swift; sourceTree = "<group>"; };
 		4E3489B77DE7D0F260049D4A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborQuotesTests.swift; sourceTree = "<group>"; };
 		56DBDC0FB9531FF058A35A46 /* ATTRIBUTIONS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ATTRIBUTIONS.md; sourceTree = "<group>"; };
+		59E645C24386374B4AFAA842 /* NearbyPeerBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyPeerBrowser.swift; sourceTree = "<group>"; };
 		5B1AFFA2E30B7D3FA1685A04 /* NeighborSpeechVarietyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechVarietyTests.swift; sourceTree = "<group>"; };
 		6131FC872C7A4CEDC883CB47 /* NeighborWinQuotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborWinQuotes.swift; sourceTree = "<group>"; };
 		67D42A1ED5CFC47A62212E43 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		68A23DDBAD5F1DF843341BD3 /* NearbyGameControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyGameControllerTests.swift; sourceTree = "<group>"; };
 		6A296CE0A4ACC9C6FEAC0D0C /* TacXOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TacXOTests.swift; sourceTree = "<group>"; };
 		74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		76A1B07642E0E2F4EDE30E68 /* AdaptiveDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficulty.swift; sourceTree = "<group>"; };
 		78F529C534C1AD55CBB3409D /* AIPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPlayerTests.swift; sourceTree = "<group>"; };
 		7E0CAB53DCD7947D5E099CD4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7ECB0D122856E2C1F036EF41 /* NearbyWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyWaitingView.swift; sourceTree = "<group>"; };
 		8303BCC6F0F3B70C7F438F4B /* GameTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTheme.swift; sourceTree = "<group>"; };
+		886EB2C7606FB5239E8B5DFB /* NearbyGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyGameController.swift; sourceTree = "<group>"; };
 		8C3941829C6F5C2A4BDA1D7D /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		8EAA49A24FEC371863A8CEE3 /* neighbor_loss_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_3.wav; sourceTree = "<group>"; };
 		99FC4226CBB4D1A6DC491C7B /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
+		9A2B17C017C072C6E379057D /* NearbyGameMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyGameMessage.swift; sourceTree = "<group>"; };
 		9FA3EC4F77C70F39CFEF354D /* NeighborMoveComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborMoveComments.swift; sourceTree = "<group>"; };
 		A2F6F6A87C19B2812C9BC13F /* AdaptiveDifficultyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyTests.swift; sourceTree = "<group>"; };
 		A6107508BB0EC0AAF103358E /* NeighborSpeechVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechVariety.swift; sourceTree = "<group>"; };
 		A9619A3FCE5E71572CDE01CF /* neighbor_loss_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_2.wav; sourceTree = "<group>"; };
 		AA6310856F6ACD8839F5B9DF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
+		AD5131351DE6F8BE5970A56E /* NearbyGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyGameService.swift; sourceTree = "<group>"; };
 		B0214435EEDFC1525D908CFF /* TacXO.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TacXO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C200C0B8C871F56CC065A771 /* NeighborSpeechBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborSpeechBubbleView.swift; sourceTree = "<group>"; };
 		CBB5A7AC06360F0DA248B836 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		D3991FA298BF6442B2555586 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
 		D554D0DFD010F3690343738C /* neighbor_loss_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neighbor_loss_1.wav; sourceTree = "<group>"; };
 		D5574D8ACC4CCF6B3BFABD60 /* QuoteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteOverlayView.swift; sourceTree = "<group>"; };
 		D861F82E00C63BD97238A8F2 /* PaperBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperBackgroundView.swift; sourceTree = "<group>"; };
@@ -107,6 +130,7 @@
 		E4CF652507BB5486906862AF /* HumanMoveAssessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanMoveAssessment.swift; sourceTree = "<group>"; };
 		E5B2556E10DD213A76CDE489 /* place.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = place.wav; sourceTree = "<group>"; };
 		E8E6CE9C9835DBE03EC1B354 /* WinChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinChecker.swift; sourceTree = "<group>"; };
+		EBF1220FA0A1A196D9554DD3 /* NearbyGameMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyGameMessageTests.swift; sourceTree = "<group>"; };
 		EE42257461FC6F6D64C63C57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE609F7E507326E82864DFB6 /* MoveCommentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCommentTests.swift; sourceTree = "<group>"; };
 		EE688B7CE2D78E1393B99AFC /* Neighbor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighbor.swift; sourceTree = "<group>"; };
@@ -166,6 +190,7 @@
 				2D77A1054B37BE07FA1C0D38 /* GameSettings.swift */,
 				E4CF652507BB5486906862AF /* HumanMoveAssessment.swift */,
 				99FC4226CBB4D1A6DC491C7B /* Mark.swift */,
+				36F058D0D3949BB1438CE1BF /* NearbySessionPhase.swift */,
 				0DAB25A1FB6E33229FBD3D0D /* NeighborComment.swift */,
 				FFB1F8ADDEB18FFD387D30A2 /* NeighborQuote.swift */,
 			);
@@ -179,6 +204,7 @@
 				0385EF2B121AFD43ABF36593 /* AI */,
 				3331D8A0FA33FAC5D32E8A57 /* Engine */,
 				4EDE9D9E5C37514897CCCFE9 /* Models */,
+				AE40FC2A3AAC2377610BEFB0 /* Networking */,
 				3F956DF789EBF6F6648726BB /* Personality */,
 				7599819B9269ADABD913F02C /* Resources */,
 				95CE44627D0FCEF0E692C0CE /* ViewModels */,
@@ -208,6 +234,9 @@
 				8C3941829C6F5C2A4BDA1D7D /* CellView.swift */,
 				8303BCC6F0F3B70C7F438F4B /* GameTheme.swift */,
 				05D038008BF4660E34AAB50C /* HardnessViews.swift */,
+				0B2429D864126851A251CB2E /* NearbyBrowseView.swift */,
+				2FD727FF9AB9165B2EF94D9C /* NearbyPauseOverlay.swift */,
+				7ECB0D122856E2C1F036EF41 /* NearbyWaitingView.swift */,
 				C200C0B8C871F56CC065A771 /* NeighborSpeechBubbleView.swift */,
 				D861F82E00C63BD97238A8F2 /* PaperBackgroundView.swift */,
 				AA6310856F6ACD8839F5B9DF /* PlayView.swift */,
@@ -225,6 +254,8 @@
 				78F529C534C1AD55CBB3409D /* AIPlayerTests.swift */,
 				74CD9E6C7AF5FDB764EC6A80 /* GameEngineTests.swift */,
 				EE609F7E507326E82864DFB6 /* MoveCommentTests.swift */,
+				68A23DDBAD5F1DF843341BD3 /* NearbyGameControllerTests.swift */,
+				EBF1220FA0A1A196D9554DD3 /* NearbyGameMessageTests.swift */,
 				52343FEC58686D74BE8BF747 /* NeighborQuotesTests.swift */,
 				5B1AFFA2E30B7D3FA1685A04 /* NeighborSpeechVarietyTests.swift */,
 				6A296CE0A4ACC9C6FEAC0D0C /* TacXOTests.swift */,
@@ -246,8 +277,21 @@
 			isa = PBXGroup;
 			children = (
 				67D42A1ED5CFC47A62212E43 /* GameController.swift */,
+				886EB2C7606FB5239E8B5DFB /* NearbyGameController.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AE40FC2A3AAC2377610BEFB0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				407E5A5E7D496B9976F7B26F /* AppIdentity.swift */,
+				9A2B17C017C072C6E379057D /* NearbyGameMessage.swift */,
+				AD5131351DE6F8BE5970A56E /* NearbyGameService.swift */,
+				59E645C24386374B4AFAA842 /* NearbyPeerBrowser.swift */,
+				D3991FA298BF6442B2555586 /* TransferService.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		C70B528DF3C592F2ECB3E2F4 = {
@@ -362,6 +406,8 @@
 				B0824588F3B393345460AD48 /* AdaptiveDifficultyTests.swift in Sources */,
 				B3996018154EFEDAD6D49353 /* GameEngineTests.swift in Sources */,
 				E68D082828A2333EE04C24C3 /* MoveCommentTests.swift in Sources */,
+				E6BDCE290C1B89F956D09BED /* NearbyGameControllerTests.swift in Sources */,
+				10B161DF1643CD8EA8F07BEE /* NearbyGameMessageTests.swift in Sources */,
 				E7EC95D217D90DA7876FF723 /* NeighborQuotesTests.swift in Sources */,
 				9BC0F9E09DF776F1205F395E /* NeighborSpeechVarietyTests.swift in Sources */,
 				07B9DA823F7604C292904C1D /* TacXOTests.swift in Sources */,
@@ -375,6 +421,7 @@
 			files = (
 				783A2853430884781D7719E8 /* AIPlayer.swift in Sources */,
 				853590898FF9DC322A051994 /* AdaptiveDifficulty.swift in Sources */,
+				078D63B6ADC1F3B338507E01 /* AppIdentity.swift in Sources */,
 				20B056AAA166C9468D1064EF /* AppLanguage.swift in Sources */,
 				4760A7880DC0E45FE4CB9711 /* BoardView.swift in Sources */,
 				46D0C3AA185AF748D5A38D9D /* Cell.swift in Sources */,
@@ -386,6 +433,14 @@
 				4C37921F5923FD1D5CB3A768 /* HardnessViews.swift in Sources */,
 				5D33F98E5EDF8D85E2F333CA /* HumanMoveAssessment.swift in Sources */,
 				8CCE4936C88B2E2B5A4399C3 /* Mark.swift in Sources */,
+				DBAB592D4BBA3BBD7FED2E70 /* NearbyBrowseView.swift in Sources */,
+				D283FD9F41258A89B6AC9A93 /* NearbyGameController.swift in Sources */,
+				FD740FC42B961119F2BD9855 /* NearbyGameMessage.swift in Sources */,
+				BD384FD7004FD7E80588593A /* NearbyGameService.swift in Sources */,
+				BE4F0D4FD4500182C808A212 /* NearbyPauseOverlay.swift in Sources */,
+				7301F10C0BD00EAA4DB944E7 /* NearbyPeerBrowser.swift in Sources */,
+				886AFA88D23EFFD3CC5DB999 /* NearbySessionPhase.swift in Sources */,
+				DED4D8481A21B686CEB4953F /* NearbyWaitingView.swift in Sources */,
 				D9ED113DE88239D8C0F060E2 /* Neighbor.swift in Sources */,
 				EFEF1E4296540E0255F404AD /* NeighborComment.swift in Sources */,
 				D4444C33B392D64782546BAE /* NeighborMoveComments.swift in Sources */,
@@ -400,6 +455,7 @@
 				596793A4184AD78F53388E06 /* SettingsView.swift in Sources */,
 				16C3CBADC200EC32C843A594 /* SoundManager.swift in Sources */,
 				5D3CACC0A93792A3A4ECD2E2 /* TacXOApp.swift in Sources */,
+				A3FF52B7E135BFBC09DB621F /* TransferService.swift in Sources */,
 				9131D1E60AA572A1DC1A7F19 /* WinCelebrationView.swift in Sources */,
 				EEE236BF844F116C4002821C /* WinChecker.swift in Sources */,
 			);
@@ -670,7 +726,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/milky-way-66/communication-kit.git";
 			requirement = {
-				branch = main;
+				branch = 1.0.0;
 				kind = branch;
 			};
 		};

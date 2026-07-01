@@ -1,5 +1,19 @@
 import Foundation
 
+enum NearbyRole: String, Codable, CaseIterable, Identifiable {
+    case host
+    case join
+
+    var id: String { rawValue }
+
+    var labelKey: String {
+        switch self {
+        case .host: return "nearby_role_host"
+        case .join: return "nearby_role_join"
+        }
+    }
+}
+
 enum BoardSize: String, Codable, CaseIterable, Identifiable {
     case three = "3×3"
     case five = "5×5"
@@ -35,6 +49,7 @@ enum BoardSize: String, Codable, CaseIterable, Identifiable {
 enum GameMode: String, Codable, CaseIterable, Identifiable {
     case twoPlayer
     case vsNeighbor
+    case nearbyPvP
 
     var id: String { rawValue }
 
@@ -42,6 +57,7 @@ enum GameMode: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .twoPlayer: return "mode_two_player"
         case .vsNeighbor: return "mode_vs_neighbor"
+        case .nearbyPvP: return "mode_nearby_pvp"
         }
     }
 
@@ -53,6 +69,8 @@ enum GameMode: String, Codable, CaseIterable, Identifiable {
             self = .twoPlayer
         case "vsNeighbor", "vs Neighbor":
             self = .vsNeighbor
+        case "nearbyPvP", "PvP Nearby":
+            self = .nearbyPvP
         default:
             self = .vsNeighbor
         }
@@ -63,6 +81,7 @@ struct GameSettings: Codable, Equatable {
     var winLength: Int = 5
     var boardSize: BoardSize = .ten
     var mode: GameMode = .vsNeighbor
+    var nearbyRole: NearbyRole = .host
     var language: AppLanguage = .system
 
     static let `default` = GameSettings()
