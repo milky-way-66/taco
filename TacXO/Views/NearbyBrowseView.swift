@@ -3,49 +3,59 @@ import SwiftUI
 struct NearbyBrowseView: View {
     let hosts: [DiscoveredHost]
     let onJoin: (DiscoveredHost) -> Void
+    let onRefresh: () -> Void
 
     var body: some View {
-        Group {
-            if hosts.isEmpty {
-                VStack(spacing: 16) {
-                    Spacer()
-                    Image(systemName: "wifi.slash")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
-                    Text(String(localized: "nearby_no_games"))
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                    ProgressView()
-                    Spacer()
-                }
-                .padding(32)
-            } else {
-                List(hosts) { host in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(host.displayName)
-                                .font(.headline)
-                            Text(
-                                String(
-                                    format: String(localized: "nearby_rules_format"),
-                                    host.boardSize.rawValue,
-                                    host.winLength
-                                )
-                            )
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        }
+        VStack(spacing: 0) {
+            Group {
+                if hosts.isEmpty {
+                    VStack(spacing: 16) {
                         Spacer()
-                        Button(String(localized: "nearby_join")) {
-                            onJoin(host)
-                        }
-                        .buttonStyle(.borderedProminent)
+                        Image(systemName: "wifi.slash")
+                            .font(.largeTitle)
+                            .foregroundStyle(.secondary)
+                        Text(String(localized: "nearby_no_games"))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                        ProgressView()
+                        Spacer()
                     }
-                    .padding(.vertical, 4)
+                    .padding(32)
+                } else {
+                    List(hosts) { host in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(host.displayName)
+                                    .font(.headline)
+                                Text(
+                                    String(
+                                        format: String(localized: "nearby_rules_format"),
+                                        host.boardSize.rawValue,
+                                        host.winLength
+                                    )
+                                )
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Button(String(localized: "nearby_join")) {
+                                onJoin(host)
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            Button(action: onRefresh) {
+                Label(String(localized: "nearby_refresh"), systemImage: "arrow.clockwise")
+            }
+            .buttonStyle(.bordered)
+            .padding(.bottom, 24)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

@@ -90,16 +90,38 @@ struct PlayView: View {
         if isNearbyMode {
             switch nearbyController.phase {
             case .idle, .advertising:
-                NearbyWaitingView(settings: nearbyController.settings) {
-                    nearbyController.cancelSession()
+                if nearbyController.settings.nearbyRole == .host {
+                    NearbyHostLobbyView(
+                        settings: nearbyController.settings,
+                        isWaiting: nearbyController.phase == .advertising,
+                        onHost: { nearbyController.beginSessionIfNeeded() },
+                        onCancel: { nearbyController.cancelHosting() }
+                    )
+                } else {
+                    NearbyBrowseView(
+                        hosts: nearbyController.discoveredHosts,
+                        onJoin: { host in nearbyController.join(host: host) },
+                        onRefresh: { nearbyController.refreshBrowsing() }
+                    )
                 }
             case .browsing:
-                NearbyBrowseView(hosts: nearbyController.discoveredHosts) { host in
-                    nearbyController.join(host: host)
-                }
+                NearbyBrowseView(
+                    hosts: nearbyController.discoveredHosts,
+                    onJoin: { host in nearbyController.join(host: host) },
+                    onRefresh: { nearbyController.refreshBrowsing() }
+                )
             case .connecting:
-                ProgressView(String(localized: "nearby_connecting"))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 24) {
+                    Spacer()
+                    ProgressView(String(localized: "nearby_connecting"))
+                    Spacer()
+                    Button(String(localized: "nearby_cancel"), role: .cancel) {
+                        nearbyController.cancelConnecting()
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.bottom, 24)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .playing, .paused:
                 nearbyBoardContent
             }
@@ -256,7 +278,11 @@ struct PlayView: View {
 
     private var nearbyStatusLabel: String {
         switch nearbyController.phase {
-        case .idle, .advertising:
+        case .idle:
+            return nearbyController.settings.nearbyRole == .host
+                ? String(localized: "nearby_host_ready")
+                : String(localized: "nearby_browse_title")
+        case .advertising:
             return String(localized: "nearby_waiting")
         case .browsing:
             return String(localized: "nearby_browse_title")

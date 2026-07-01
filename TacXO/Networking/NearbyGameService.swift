@@ -114,6 +114,7 @@ final class NearbyGameService {
 
     private func waitForPeer(on channelID: UUID) async throws {
         for _ in 0..<80 {
+            try Task.checkCancellation()
             if await transferService.isPeerConnected(for: channelID) { return }
             try await Task.sleep(for: .milliseconds(250))
         }

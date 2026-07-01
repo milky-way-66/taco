@@ -275,6 +275,23 @@
         }
       }
     },
+    "mode_nearby_pvp" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PvP Nearby"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PvP gần"
+          }
+        }
+      }
+    },
     "mode_picker_label" : {
       "localizations" : {
         "en" : {
@@ -341,114 +358,18 @@
         }
       }
     },
-    "mode_nearby_pvp" : {
+    "nearby_browse_title" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PvP Nearby"
+            "value" : "Nearby games"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PvP gần"
-          }
-        }
-      }
-    },
-    "nearby_role_section" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Role"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vai trò"
-          }
-        }
-      }
-    },
-    "nearby_role_host" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Host"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chủ phòng"
-          }
-        }
-      }
-    },
-    "nearby_role_join" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Join"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tham gia"
-          }
-        }
-      }
-    },
-    "nearby_waiting" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Waiting for opponent…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Đang chờ đối thủ…"
-          }
-        }
-      }
-    },
-    "nearby_no_games" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No games nearby — ask a friend to host"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Không có ván nào gần đây — nhờ bạn tạo phòng"
-          }
-        }
-      }
-    },
-    "nearby_join" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Join"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tham gia"
+            "value" : "Ván chơi gần đây"
           }
         }
       }
@@ -469,18 +390,18 @@
         }
       }
     },
-    "nearby_paused" : {
+    "nearby_connecting" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Waiting for opponent to reconnect…"
+            "value" : "Connecting…"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đang chờ đối thủ kết nối lại…"
+            "value" : "Đang kết nối…"
           }
         }
       }
@@ -501,18 +422,84 @@
         }
       }
     },
-    "nearby_your_turn" : {
+    "nearby_host_ready" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your turn"
+            "value" : "Ready to host"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lượt của bạn"
+            "value" : "Sẵn sàng tạo phòng"
+          }
+        }
+      }
+    },
+    "nearby_idle_host" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not hosting a game"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chưa tạo phòng"
+          }
+        }
+      }
+    },
+    "nearby_idle_join" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not looking for games"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chưa tìm ván chơi"
+          }
+        }
+      }
+    },
+    "nearby_join" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tham gia"
+          }
+        }
+      }
+    },
+    "nearby_no_games" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No games nearby — ask a friend to host"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không có ván nào gần đây — nhờ bạn tạo phòng"
           }
         }
       }
@@ -533,34 +520,100 @@
         }
       }
     },
-    "nearby_browse_title" : {
+    "nearby_opponent_wins" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nearby games"
+            "value" : "Opponent wins"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ván chơi gần đây"
+            "value" : "Đối thủ thắng"
           }
         }
       }
     },
-    "nearby_connecting" : {
+    "nearby_paused" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connecting…"
+            "value" : "Waiting for opponent to reconnect…"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đang kết nối…"
+            "value" : "Đang chờ đối thủ kết nối lại…"
+          }
+        }
+      }
+    },
+    "nearby_refresh" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Làm mới"
+          }
+        }
+      }
+    },
+    "nearby_role_host" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Host"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chủ phòng"
+          }
+        }
+      }
+    },
+    "nearby_role_join" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tham gia"
+          }
+        }
+      }
+    },
+    "nearby_role_section" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Role"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vai trò"
           }
         }
       }
@@ -581,6 +634,55 @@
         }
       }
     },
+    "nearby_start_host" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Host game"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tạo phòng"
+          }
+        }
+      }
+    },
+    "nearby_start_join" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find games"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tìm ván chơi"
+          }
+        }
+      }
+    },
+    "nearby_waiting" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for opponent…"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đang chờ đối thủ…"
+          }
+        }
+      }
+    },
     "nearby_you_win" : {
       "localizations" : {
         "en" : {
@@ -597,18 +699,18 @@
         }
       }
     },
-    "nearby_opponent_wins" : {
+    "nearby_your_turn" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opponent wins"
+            "value" : "Your turn"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đối thủ thắng"
+            "value" : "Lượt của bạn"
           }
         }
       }

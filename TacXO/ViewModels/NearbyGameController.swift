@@ -15,6 +15,7 @@ final class NearbyGameController {
 
     private var service: NearbyGameService?
     private var browseTask: Task<Void, Never>?
+    private var sessionTask: Task<Void, Never>?
 
     var canAcceptInput: Bool {
         phase == .playing && !isPaused && engine.result == .ongoing && engine.currentPlayer == localMark
@@ -40,18 +41,51 @@ final class NearbyGameController {
             cancelSession()
             return
         }
-        guard phase == .idle else { return }
         switch settings.nearbyRole {
         case .host:
+            guard phase == .idle else { return }
             startHosting()
         case .join:
+            guard phase == .idle || phase == .browsing else { return }
+            if phase == .idle { startBrowsing() }
+        }
+    }
+
+    func cancelHosting() {
+        sessionTask?.cancel()
+        sessionTask = nil
+        phase = .idle
+        Task { await service?.stopSession() }
+    }
+
+    func refreshBrowsing() {
+        guard settings.nearbyRole == .join else { return }
+        browseTask?.cancel()
+        browseTask = nil
+        discoveredHosts = []
+        service?.stopBrowsing()
+        phase = .browsing
+        Task {
+            await service?.stopSession()
+            guard settings.nearbyRole == .join, phase == .browsing else { return }
             startBrowsing()
+        }
+    }
+
+    func cancelConnecting() {
+        sessionTask?.cancel()
+        sessionTask = nil
+        Task {
+            await service?.stopSession()
+            refreshBrowsing()
         }
     }
 
     func cancelSession() {
         browseTask?.cancel()
         browseTask = nil
+        sessionTask?.cancel()
+        sessionTask = nil
         phase = .idle
         isPaused = false
         isWinCelebrating = false
@@ -63,15 +97,19 @@ final class NearbyGameController {
         guard let service else { return }
         phase = .connecting
         browseTask?.cancel()
+        browseTask = nil
         service.stopBrowsing()
-        Task {
+        sessionTask?.cancel()
+        sessionTask = Task {
             do {
                 let participantID = await AppIdentity().currentParticipantID.rawValue
                 try await service.join(host: host, participantID: participantID)
+                guard !Task.isCancelled, phase == .connecting else { return }
                 localMark = .o
             } catch {
+                guard !Task.isCancelled else { return }
                 phase = .browsing
-                startBrowsing()
+                refreshBrowsing()
             }
         }
     }
@@ -132,14 +170,18 @@ final class NearbyGameController {
     private func startHosting() {
         guard let service else { return }
         phase = .advertising
-        Task {
+        sessionTask?.cancel()
+        sessionTask = Task {
             do {
                 let participantID = await AppIdentity().currentParticipantID.rawValue
+                guard !Task.isCancelled, phase == .advertising else { return }
                 localMark = .x
                 resetBoard()
                 try await service.startHosting(settings: settings, participantID: participantID)
+                guard !Task.isCancelled, phase == .advertising else { return }
                 phase = .playing
             } catch {
+                guard !Task.isCancelled, phase == .advertising else { return }
                 phase = .idle
             }
         }
@@ -154,6 +196,7 @@ final class NearbyGameController {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .milliseconds(500))
                 guard let self, let service = self.service else { return }
+                guard self.phase == .browsing else { return }
                 self.discoveredHosts = service.discoveredHosts
             }
         }

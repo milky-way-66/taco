@@ -1,7 +1,9 @@
 import SwiftUI
 
-struct NearbyWaitingView: View {
+struct NearbyHostLobbyView: View {
     let settings: GameSettings
+    let isWaiting: Bool
+    let onHost: () -> Void
     let onCancel: () -> Void
 
     var body: some View {
@@ -10,10 +12,12 @@ struct NearbyWaitingView: View {
 
             Image(systemName: "antenna.radiowaves.left.and.right")
                 .font(.system(size: 48))
-                .foregroundStyle(.tint)
-                .symbolEffect(.pulse)
+                .foregroundStyle(isWaiting ? Color.accentColor : Color.secondary)
+                .symbolEffect(.pulse, isActive: isWaiting)
 
-            Text(String(localized: "nearby_waiting"))
+            Text(isWaiting
+                 ? String(localized: "nearby_waiting")
+                 : String(localized: "nearby_host_ready"))
                 .font(.title3.weight(.semibold))
                 .multilineTextAlignment(.center)
 
@@ -23,8 +27,13 @@ struct NearbyWaitingView: View {
 
             Spacer()
 
-            Button(String(localized: "nearby_cancel"), role: .cancel, action: onCancel)
-                .buttonStyle(.bordered)
+            if isWaiting {
+                Button(String(localized: "nearby_cancel"), role: .cancel, action: onCancel)
+                    .buttonStyle(.bordered)
+            } else {
+                Button(String(localized: "nearby_start_host"), action: onHost)
+                    .buttonStyle(.borderedProminent)
+            }
         }
         .padding(32)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
